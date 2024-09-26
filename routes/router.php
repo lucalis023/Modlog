@@ -1,4 +1,5 @@
 <?php
+require_once '../config/base_url.php';
 
 $action = 'games';
 
@@ -15,6 +16,8 @@ switch ($params[0]) {
     $controller->showGames();
     break;
   case 'catalog':
-    echo 'Catalog';
+    require_once '../app/controllers/catalog.controller.php';
+    $controller = new catalogController;
+    $controller->showCatalog($params[1]);
     break;
 }
