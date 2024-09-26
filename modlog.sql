@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2024 at 11:07 PM
+-- Generation Time: Sep 26, 2024 at 11:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -113,6 +113,20 @@ INSERT INTO `mods` (`id`, `game_id`, `category_id`, `creator_id`, `name`, `descr
 (3, 2, 4, 1, 'Shuttle Orbiter Construction-Kit\r\n', 'This mod provides a set of parts designed to emulate the NASA Space Shuttle Orbiter. It works best paired with reDIRECT launch vehicle parts in a 2.5X scale solar system, but can be used however you please! Please consult the user manual for a brief guide on how to build and fly the Space Shuttle. ', '2021-04-29', 'https://github.com/benjee10/Shuttle-Orbiter-Construction-Kit/releases', 'https://spacedock.info/mod/2176/Shuttle%20Orbiter%20Construction%20Kit#changelog'),
 (4, 2, 4, 1, 'HabTech2', 'Parts designed to replicate the US Orbital Section (USOS) of the International Space Station:\r\n- Pressurised modules & cupola\r\n- Integrated Truss Structure & solar arrays, including iROSA\r\n- External payloads & experiments\r\n- Other structural pieces, science parts and antennas\r\n- Canadarm2 & Mobile Base System\r\n- New additions to the ISS such as BEAM, Bishop airlock, and more', '2023-02-18', 'https://github.com/benjee10/HabTech2', 'https://spacedock.info/mod/2078/HabTech2');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `admin` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -146,6 +160,12 @@ ALTER TABLE `mods`
   ADD KEY `FK_mod_game_id` (`game_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -172,6 +192,12 @@ ALTER TABLE `games`
 --
 ALTER TABLE `mods`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
