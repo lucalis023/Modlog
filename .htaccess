@@ -1,11 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Si el archivo o directorio solicitado existe, no reescribas la URL
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    # Redirige todas las solicitudes a routes/router.php
     RewriteRule \.(?:css|js|jpe?g|gif|png)$ - [L]
     RewriteRule ^(.*)$ routes/router.php?action=$1 [QSA,L]
 </IfModule>
