@@ -22,14 +22,12 @@ class modpageController extends ViewController {
 
   public function showMod($mod_id) {
     $mod = $this->modsModel->getModById($mod_id);
-    if (!empty($mod)){
+    if ($this->isNotEmpty($mod)){
       $creator = $this->creatorsModel->getCreatorById($mod->creator_id);
       $game = $this->gamesModel->getGameById($mod->game_id);
       $category = $this->categoriesModel->getCategoryById($mod->category_id);
       
       $this->view->showMod($mod, $game, $creator, $category);
-    } else {
-      echo 'No mod found.';
     }
   }
 }

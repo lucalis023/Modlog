@@ -19,11 +19,9 @@ class catalogController extends ViewController{
 
   public function showCatalog($game_id) {
     $game = $this->gamesModel->getGameById($game_id);
-    if (!empty($game)) {
+    if ($this->isNotEmpty($game)) {
       $mods = $this->modsModel->getModsByGame($game_id);
       $this->view->showCatalog($game, $mods);
-    } else {
-      echo 'Game not found';
     }
   }
 }

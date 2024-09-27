@@ -16,7 +16,7 @@ class creatorController extends ViewController {
 
   public function showCreator($id) {
     $creator = $this->creatorModel->getCreatorById($id);
-    if (!empty($creator)) {
+    if ($this->isNotEmpty($creator)) {
       $mods = $this->modsModel->getModsByCreator($id);
       $this->view->showCreator($creator, $mods);
     }
