@@ -1,5 +1,6 @@
 <?php
 require_once '../config/base_url.php';
+require_once '../config/db.php';
 
 $action = 'games';
 

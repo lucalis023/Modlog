@@ -1,18 +1,26 @@
 <?php 
-require_once __DIR__ . '/Controller.php';
 
-class catalogController extends Controller {
-  
+class catalogController {
+  protected $view;
+  protected $gamesModel;
+  protected $modsModel;
+  protected $categoriesModel;
+
   public function __construct() {
-    require_once dirname(__DIR__, 1) . '/models/catalog.model.php';
+    require_once dirname(__DIR__, 1) . '/models/games.model.php';
+    $this->gamesModel = new gamesModel;
+    require_once dirname(__DIR__, 1) . '/models/mods.model.php';
+    $this->modsModel = new modsModel;
+    require_once dirname(__DIR__, 1) . '/models/categories.model.php';
+    $this->categoriesModel = new categoriesModel;
     require_once dirname(__DIR__, 1) . '/views/catalog.view.php';
-    parent::__construct(new catalogModel, new catalogView);
+    $this->view = new catalogView;
   }
 
   public function showCatalog($game_id) {
-    $game = $this->model->getGame($game_id);
+    $game = $this->gamesModel->getGameById($game_id);
     if (!empty($game)) {
-      $mods = $this->model->getMods($game_id);
+      $mods = $this->modsModel->getModsByGame($game_id);
       $this->view->showCatalog($game, $mods);
     } else {
       echo 'Game not found';
