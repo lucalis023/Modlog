@@ -1,5 +1,5 @@
 <ul>
   <?php foreach($mods as $mod): ?>
-    <li><?= $mod->name ?></li>
+    <li><a href="<?= BASE_URL . 'mod/' . $mod->id ?>"><?= $mod->name ?></a></li>
   <?php endforeach ?>
 </ul>
