@@ -17,4 +17,9 @@ class modsModel extends Model {
     $result = $this->executeQueryWithParams($query, [$id]);
     if(!empty($result)) return $result[0];
   }
+
+  public function getModsByCreator($creator_id){
+    $query = $this->db->prepare('select * from mods where creator_id = ?');
+    return $this->executeQueryWithParams($query, [$creator_id]);
+  }
 }
