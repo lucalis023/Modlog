@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/Controller.php';
+require_once __DIR__ . '/controllerTypes/BaseController.php';
 
-class gamesController extends Controller {
+class gamesController extends BaseController {
   
   public function __construct() {
     require_once dirname(__DIR__, 1) . '/models/games.model.php';

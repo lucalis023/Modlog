@@ -21,4 +21,9 @@ switch ($params[0]) {
     $controller = new catalogController;
     $controller->showCatalog($params[1]);
     break;
+  case 'mod':
+    require_once '../app/controllers/modpage.controller.php';
+    $controller = new modpageController;
+    $controller->showMod($params[1]);
+    break;
 }

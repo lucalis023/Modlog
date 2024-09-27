@@ -9,7 +9,12 @@ class modsModel extends Model {
 
   public function getModsByGame($game_id) {
     $query = $this->db->prepare('select * from mods where game_id = ?');
-    $query->execute([$game_id]);
-    return $query->fetchAll(PDO::FETCH_OBJ);
+    return $this->executeQueryWithParams($query, [$game_id]);
+  }
+
+  public function getModById($id) {
+    $query = $this->db->prepare('select * from mods where id = ?');
+    $result = $this->executeQueryWithParams($query, [$id]);
+    if(!empty($result)) return $result[0];
   }
 }

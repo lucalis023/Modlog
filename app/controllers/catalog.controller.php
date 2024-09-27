@@ -1,7 +1,7 @@
 <?php 
+require_once __DIR__ . '/controllerTypes/ViewController.php';
 
-class catalogController {
-  protected $view;
+class catalogController extends ViewController{
   protected $gamesModel;
   protected $modsModel;
   protected $categoriesModel;
@@ -14,7 +14,7 @@ class catalogController {
     require_once dirname(__DIR__, 1) . '/models/categories.model.php';
     $this->categoriesModel = new categoriesModel;
     require_once dirname(__DIR__, 1) . '/views/catalog.view.php';
-    $this->view = new catalogView;
+    parent::__construct(new catalogView);
   }
 
   public function showCatalog($game_id) {

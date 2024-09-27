@@ -9,13 +9,12 @@ class gamesModel extends Model {
 
   public function getGames() {
     $query = $this->db->prepare('select * from games');
-    $query->execute();
-    return $query->fetchAll(PDO::FETCH_OBJ);
+    return $this->executeQuery($query);
   }
 
   public function getGameById($game_id) {
     $query = $this->db->prepare('select * from games where id = ?');
-    $query->execute([$game_id]);
-    return $query->fetch(PDO::FETCH_OBJ);
+    $result = $this->executeQueryWithParams($query, [$game_id]);
+    if (!empty($result)) return $result[0];
   }
 }
