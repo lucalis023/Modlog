@@ -7,7 +7,7 @@ class creatorController extends ViewController {
 
   public function __construct(){
     require_once dirname(__DIR__, 1) . '/views/creator.view.php';
-    parent::__construct(new creatorView);
+    parent::__construct(new creatorView, 'Creator');
     require_once dirname(__DIR__, 1) . '/models/creators.model.php';
     $this->creatorModel = new creatorsModel;
     require_once dirname(__DIR__, 1) . '/models/mods.model.php';
@@ -17,8 +17,13 @@ class creatorController extends ViewController {
   public function showCreator($id) {
     $creator = $this->creatorModel->getCreatorById($id);
     if ($this->isNotEmpty($creator)) {
+      $this->setTittle($creator->name);
+      $this->setData('creator', $creator);
+
       $mods = $this->modsModel->getModsByCreator($id);
-      $this->view->showCreator($creator, $mods);
+      $this->setData('mods', $mods);
+
+      $this->view->renderCreator($this->data);
     }
   }
 }

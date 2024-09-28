@@ -17,17 +17,25 @@ class modpageController extends ViewController {
     require_once dirname(__DIR__, 1) . '/models/categories.model.php';
     $this->categoriesModel = new categoriesModel;
     require_once dirname(__DIR__, 1) . '/views/modpage.view.php';
-    parent::__construct(new modpageView);
+    parent::__construct(new modpageView, 'Modpage');
   }
 
-  public function showMod($mod_id) {
+  public function showModpage($mod_id) {
     $mod = $this->modsModel->getModById($mod_id);
     if ($this->isNotEmpty($mod)){
+      $this->setTittle($mod->name);
+      $this->setData('mod', $mod);
+
       $creator = $this->creatorsModel->getCreatorById($mod->creator_id);
+      $this->setData('creator', $creator);
+
       $game = $this->gamesModel->getGameById($mod->game_id);
+      $this->setData('game', $game);
+
       $category = $this->categoriesModel->getCategoryById($mod->category_id);
+      $this->setData('category', $category);
       
-      $this->view->showMod($mod, $game, $creator, $category);
+      $this->view->renderModpage($this->data);
     }
   }
 }

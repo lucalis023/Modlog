@@ -29,7 +29,7 @@ try {
       if (!isset($params[1])) throw new Exception("Missing parameters.");
       require_once '../app/controllers/modpage.controller.php';
       $controller = new modpageController;
-      $controller->showMod($params[1]);
+      $controller->showModpage($params[1]);
       break;
 
     case 'creator':

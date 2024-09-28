@@ -3,11 +3,13 @@
 class ViewController {
   protected $view;
   protected $error;
+  protected $data;
 
-  public function __construct($view) {
+  public function __construct($view, $tittle) {
     $this->view = $view;
     require_once dirname(__DIR__, 1) . '/error.controller.php';
     $this->error = new errorController;
+    $this->setTittle($tittle);
   }
 
   public function isNotEmpty($var) {
@@ -19,5 +21,13 @@ class ViewController {
     } catch (Exception $err) {
       $this->error->handleError($err);
     }
+  }
+
+  public function setData($key, $value) {
+    $this->data[$key] = $value;
+  }
+
+  public function setTittle($value) {
+    $this->setData('tittle', 'Modlog: ' . $value);
   }
 }

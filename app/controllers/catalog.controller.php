@@ -14,14 +14,19 @@ class catalogController extends ViewController{
     require_once dirname(__DIR__, 1) . '/models/categories.model.php';
     $this->categoriesModel = new categoriesModel;
     require_once dirname(__DIR__, 1) . '/views/catalog.view.php';
-    parent::__construct(new catalogView);
+    parent::__construct(new catalogView, 'Catalog');
   }
 
   public function showCatalog($game_id) {
     $game = $this->gamesModel->getGameById($game_id);
     if ($this->isNotEmpty($game)) {
+      $this->setTittle($game->name);
+      $this->setData('game', $game);
+
       $mods = $this->modsModel->getModsByGame($game_id);
-      $this->view->showCatalog($game, $mods);
+      $this->setData('mods', $mods);
+      
+      $this->view->renderCatalog($this->data);
     }
   }
 }

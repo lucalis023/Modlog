@@ -13,13 +13,13 @@ class errorController {
   public function handleError($err) {
     switch ($err->getMessage()) {
       case 'Missing parameters.':
-        $this->view->showMissingParams();
+        $this->view->renderMissingParams();
         break;
       case 'Empty response.':
-        $this->view->showEmptyResponse();
+        $this->view->renderEmptyResponse();
         break;
       default:
-        $this->view->showDefaultError(); 
+        $this->view->renderDefaultError(); 
       }
   }
 }
