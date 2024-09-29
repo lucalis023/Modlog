@@ -1,0 +1,20 @@
+<form action="<?= BASE_URL . 'login/' ?>" method="POST">
+  <input type="hidden" name="action" value="log-in">
+  <label for="user">
+    Username: 
+    <input type="text" name="user" required>
+  </label>
+  <label for="pass">
+    Password: 
+    <input type="password" name="pass" required>
+  </label>
+
+  <?php if (isset($wrongUser)) { ?>
+    <p>Wrong username</p>
+  <?php } ?>
+
+  <?php if (isset($wrongPass)) { ?>
+    <p>Wrong password</p>
+  <?php } ?>
+  <button type="submit">Log in</button>
+</form>

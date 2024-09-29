@@ -8,6 +8,8 @@ if (!empty($_GET['action'])) {
   $action = $_GET['action'];
 }
 
+session_start();
+
 try {
   $params = explode("/", $action);
 
@@ -37,6 +39,12 @@ try {
       require_once '../app/controllers/creator.controller.php';
       $controller = new creatorController;
       $controller->showCreator($params[1]);
+      break;
+
+    case 'login':
+      require_once '../app/controllers/login.controller.php';
+      $controller = new loginController;
+      $controller->handleLogin();
       break;
 
     default:

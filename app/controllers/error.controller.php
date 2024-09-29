@@ -19,7 +19,7 @@ class errorController {
         $this->view->renderEmptyResponse();
         break;
       default:
-        $this->view->renderDefaultError(); 
+        $this->view->renderDefaultError($err); 
       }
   }
 }

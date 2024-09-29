@@ -21,6 +21,7 @@ class View {
   }
 
   public function addTemplate($template) {  
+    $template = dirname(__DIR__, 1) . '/templates' . $template;
     array_push($this->templates, $template);
   }
 }

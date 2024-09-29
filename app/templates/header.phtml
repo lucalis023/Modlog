@@ -8,4 +8,16 @@
 <body>
   <header>
     <h3>Header</h3>
+    <h4>
+      <?php if (isset($_SESSION['user_name'])) {?>
+        <h4><?= $_SESSION['user_name'] ?></h4>
+        <form action="<?= BASE_URL . 'login' ?>" method="POST">
+          <input type="hidden" name="action" value="log-out">
+          <input type="hidden" name="url" value="<?= "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>">
+          <button type="submit">Log out</button>
+        </form>
+      <?php } else { ?>
+        <a href="<?= BASE_URL . 'login'?>">Log in</a>
+      <?php } ?>
+    </h4>
   </header>

@@ -23,11 +23,18 @@ class ViewController {
     }
   }
 
+
   public function setData($key, $value) {
     $this->data[$key] = $value;
   }
 
+
   public function setTittle($value) {
     $this->setData('tittle', 'Modlog: ' . $value);
+  }
+
+  public function setUser($id, $username) {
+    $_SESSION['user_id'] = $id;
+    $_SESSION['user_name'] = $username;
   }
 }
