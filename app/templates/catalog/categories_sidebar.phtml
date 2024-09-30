@@ -1,0 +1,9 @@
+<form method="post">
+  <ul>
+    <?php foreach ($categories as $category): ?>
+      <li><button type="submit" formaction="<?= BASE_URL . 'catalog/' . $game->id . '/' . $category->id?>">
+        <?= $category->name?>
+      </button></li>
+    <?php endforeach ?>
+  </ul>
+</form>

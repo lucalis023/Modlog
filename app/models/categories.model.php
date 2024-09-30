@@ -12,4 +12,10 @@ class categoriesModel extends Model {
     $result = $this->executeQueryWithParams($query, [$id]);
     if (!empty($result)) return $result[0];
   }
+
+  public function getCategoriesByGame($game_id) {
+    $query = $this->db->prepare('select * from categories where id_game = ?');
+    $result = $this->executeQueryWithParams($query, [$game_id]);
+    return $result;
+  }
 }

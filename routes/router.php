@@ -24,7 +24,7 @@ try {
       if (!isset($params[1])) throw new Exception("Missing parameters.");
       require_once '../app/controllers/catalog.controller.php';
       $controller = new catalogController;
-      $controller->showCatalog($params[1]);
+      $controller->showCatalog($params);
       break;
 
     case 'mod':
