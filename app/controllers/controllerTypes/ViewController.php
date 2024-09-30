@@ -1,6 +1,6 @@
 <?php 
 
-class ViewController {
+abstract class ViewController {
   protected $view;
   protected $error;
   protected $data;
@@ -37,4 +37,6 @@ class ViewController {
     $_SESSION['user_id'] = $id;
     $_SESSION['user_name'] = $username;
   }
+
+  public abstract function showPage($params = null);
 }

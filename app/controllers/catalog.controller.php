@@ -17,7 +17,7 @@ class catalogController extends ViewController{
     parent::__construct(new catalogView, 'Catalog');
   }
 
-  public function showCatalog($params) {
+  public function showPage($params = null) {
     $game = $this->gamesModel->getGameById($params[1]);
     if ($this->isNotEmpty($game)) {
       $this->setTittle($game->name);

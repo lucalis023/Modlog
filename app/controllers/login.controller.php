@@ -10,19 +10,23 @@ class loginController extends BaseController {
     parent::__construct(new usersModel, new loginView, 'Login');
   }
 
-  public function handleLogin() {
+  public function showPage($params = null) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $action = $_POST['action'] ?? null;
-      switch ($action) {
-        case 'log-in': 
-          $this->logIn();
-          break;
-        case 'log-out':
-          $this->logOut($_POST['url']);
-      }
+      $this->handleLogin();
 
     } else {
       $this->view->renderLogin([]);
+    }
+  }
+
+  public function handleLogin() {
+    $action = $_POST['action'] ?? null;
+    switch ($action) {
+      case 'log-in': 
+        $this->logIn();
+        break;
+      case 'log-out':
+        $this->logOut($_POST['url']);
     }
   }
 

@@ -9,7 +9,7 @@ class gamesController extends BaseController {
     parent::__construct(new gamesModel, new gamesView, 'Games');
   }
 
-  public function showGames() {
+  public function showPage($params = null) {
     $games = $this->model->getGames();
     $this->setData('games', $games);
 

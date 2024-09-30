@@ -12,50 +12,26 @@ session_start();
 
 try {
   $params = explode("/", $action);
+  loadPage($params);
 
-  switch ($params[0]) {
-    case 'games': 
-      require_once '../app/controllers/games.controller.php';
-      $controller = new gamesController;
-      $controller->showGames();
-      break;
-
-    case 'catalog':
-      if (!isset($params[1])) throw new Exception("Missing parameters.");
-      require_once '../app/controllers/catalog.controller.php';
-      $controller = new catalogController;
-      $controller->showCatalog($params);
-      break;
-
-    case 'mod':
-      if (!isset($params[1])) throw new Exception("Missing parameters.");
-      require_once '../app/controllers/modpage.controller.php';
-      $controller = new modpageController;
-      $controller->showModpage($params[1]);
-      break;
-
-    case 'creator':
-      if (!isset($params[1])) throw new Exception("Missing parameters.");
-      require_once '../app/controllers/creator.controller.php';
-      $controller = new creatorController;
-      $controller->showCreator($params[1]);
-      break;
-
-    case 'login':
-      require_once '../app/controllers/login.controller.php';
-      $controller = new loginController;
-      $controller->handleLogin();
-      break;
-
-    default:
-      header('Location: '. BASE_URL);
-      require_once '../app/controllers/games.controller.php';
-      $controller = new gamesController;
-      $controller->showGames();
-      break;
-  }
 } catch (Exception $err) {
   require_once '../app/controllers/error.controller.php';
   $controller = new errorController;
   $controller->handleError($err); 
+}
+
+
+function loadPage($params) {
+  try {
+    require_once '../app/controllers/' . $params[0] . '.controller.php';
+    $className = $params[0] . 'Controller';
+    $controller = new $className;
+    $controller->showPage($params);
+
+  } catch (Error $e) {
+    header('Location: '. BASE_URL);
+    require_once '../app/controllers/games.controller.php';
+    $controller = new gamesController;
+    $controller->showPage($params);
+  }
 }

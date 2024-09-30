@@ -20,8 +20,8 @@ class modpageController extends ViewController {
     parent::__construct(new modpageView, 'Modpage');
   }
 
-  public function showModpage($mod_id) {
-    $mod = $this->modsModel->getModById($mod_id);
+  public function showPage($params = null) {
+    $mod = $this->modsModel->getModById($params[1]);
     if ($this->isNotEmpty($mod)){
       $this->setTittle($mod->name);
       $this->setData('mod', $mod);

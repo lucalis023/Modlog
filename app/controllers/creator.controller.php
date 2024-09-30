@@ -14,13 +14,13 @@ class creatorController extends ViewController {
     $this->modsModel = new modsModel;
   }
 
-  public function showCreator($id) {
-    $creator = $this->creatorModel->getCreatorById($id);
+  public function showPage($params = null) {
+    $creator = $this->creatorModel->getCreatorById($params[1]);
     if ($this->isNotEmpty($creator)) {
       $this->setTittle($creator->name);
       $this->setData('creator', $creator);
 
-      $mods = $this->modsModel->getModsByCreator($id);
+      $mods = $this->modsModel->getModsByCreator($creator->id);
       $this->setData('mods', $mods);
 
       $this->view->renderCreator($this->data);
