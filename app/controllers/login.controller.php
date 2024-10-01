@@ -31,13 +31,12 @@ class loginController extends BaseController {
   }
 
   public function logIn() {
-    $user = $_POST['user'] ?? null;
+    $name = $_POST['user'] ?? null;
     $pass = $_POST['pass'] ?? null;
 
-    if ($this->model->isNameinDB($user)) {
-      $user = $this->model->getUser($user, $pass);
-
-      if (!empty($user)) {
+    $user = $this->model->getUserByName($name);
+    if (!empty($user)) {
+      if (password_verify($pass, $user->password)) {
         $this->setUser($user->id, $user->username);
         header('Location: '. BASE_URL);
 
@@ -45,7 +44,6 @@ class loginController extends BaseController {
         $this->setData('wrongPass', true);
         $this->view->renderLogin($this->data);
       }
-
     } else {
       $this->setData('wrongUser', true);
       $this->view->renderLogin($this->data);

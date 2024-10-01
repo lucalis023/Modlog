@@ -10,7 +10,6 @@ if (!empty($_GET['action'])) {
 }
 
 session_start();
-
 try {
   $params = explode("/", $action);
   if(!key_exists($params[0], $routes)){
