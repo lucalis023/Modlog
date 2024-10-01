@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__ . '/controllerTypes/BaseController.php';
+require_once '../app/controllers/controllerTypes/BaseController.php';
 
 class loginController extends BaseController {
 
   public function __construct() {
-    require_once dirname(__DIR__, 1) . '/models/users.model.php';
-    require_once dirname(__DIR__, 1) . '/views/login.view.php';
+    require_once '../app/models/users.model.php';
+    require_once '../app/views/login.view.php';
     parent::__construct(new usersModel, new loginView, 'Login');
   }
 

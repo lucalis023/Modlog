@@ -7,7 +7,7 @@ abstract class ViewController {
 
   public function __construct($view, $tittle) {
     $this->view = $view;
-    require_once dirname(__DIR__, 1) . '/error.controller.php';
+    require_once '../app/controllers/error.controller.php';
     $this->error = new errorController;
     $this->setTittle($tittle);
   }

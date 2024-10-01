@@ -1,16 +1,16 @@
 <?php
-require_once __DIR__ . '/controllerTypes/ViewController.php';
+require_once '../app/controllers/controllerTypes/ViewController.php';
 
 class creatorController extends ViewController {
   protected $creatorModel;
   protected $modsModel;
 
   public function __construct(){
-    require_once dirname(__DIR__, 1) . '/views/creator.view.php';
+    require_once '../app/views/creator.view.php';
     parent::__construct(new creatorView, 'Creator');
-    require_once dirname(__DIR__, 1) . '/models/creators.model.php';
+    require_once '../app/models/creators.model.php';
     $this->creatorModel = new creatorsModel;
-    require_once dirname(__DIR__, 1) . '/models/mods.model.php';
+    require_once '../app/models/mods.model.php';
     $this->modsModel = new modsModel;
   }
 

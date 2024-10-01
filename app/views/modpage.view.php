@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/View.php';
+require_once '../app/views/View.php';
 
 class modpageView extends View {
   public function renderModpage($data) {

@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/controllerTypes/ViewController.php';
+require_once '../app/controllers/controllerTypes/ViewController.php';
 
 class catalogController extends ViewController{
   protected $gamesModel;
@@ -7,13 +7,13 @@ class catalogController extends ViewController{
   protected $categoriesModel;
 
   public function __construct() {
-    require_once dirname(__DIR__, 1) . '/models/games.model.php';
+    require_once '../app/models/games.model.php';
     $this->gamesModel = new gamesModel; 
-    require_once dirname(__DIR__, 1) . '/models/mods.model.php';
+    require_once '../app/models/mods.model.php';
     $this->modsModel = new modsModel;
-    require_once dirname(__DIR__, 1) . '/models/categories.model.php';
+    require_once '../app/models/categories.model.php';
     $this->categoriesModel = new categoriesModel;
-    require_once dirname(__DIR__, 1) . '/views/catalog.view.php';
+    require_once '../app/views/catalog.view.php';
     parent::__construct(new catalogView, 'Catalog');
   }
 

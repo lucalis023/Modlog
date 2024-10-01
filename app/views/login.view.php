@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/View.php';
+require_once '../app/views/View.php';
 
 class loginView extends View {
   public function renderLogin($data) {

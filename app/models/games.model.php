@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/Model.php';
+require_once '../app/models/Model.php';
 
 class gamesModel extends Model {
   

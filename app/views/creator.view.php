@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/View.php';
+require_once '../app/views/View.php';
 
 class creatorView extends View {
   public function renderCreator($data) {
