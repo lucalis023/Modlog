@@ -6,4 +6,9 @@ class loginView extends View {
     $this->addTemplate('/login/login.phtml');
     $this->renderPage($data);
   }
+
+  public function renderRegister($data) {
+    $this->addTemplate('/login/register.phtml');
+    $this->renderPage($data);
+  }
 }

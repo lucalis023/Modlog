@@ -1,0 +1,17 @@
+<form action="<?= BASE_URL . 'register/' ?>" method="POST">
+  <input type="hidden" name="action" value="register">
+  <label for="user">
+    Username: 
+    <input type="text" name="user" required>
+  </label>
+  <label for="email">
+    Email: 
+    <input type="email" name="email" required>
+  </label>
+  <label for="pass">
+    Password: 
+    <input type="password" name="pass" required>
+  </label>
+
+  <button type="submit">Register</button>
+</form>

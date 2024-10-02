@@ -20,6 +20,10 @@ $routes = [
     'controller' => '../app/controllers/login.controller.php',
     'class' => 'loginController'
   ],
+  'register' => [
+    'controller' => '../app/controllers/login.controller.php',
+    'class' => 'loginController'
+  ],
   'error' => [
     'controller' => '../app/controllers/error.controller.php',
     'class' => 'errorController'

@@ -8,9 +8,15 @@ class usersModel extends Model {
     parent::__construct();
   }
 
-  public function getUserByName($name) {
-    $query = $this->db->prepare('select * from users where username = :name');
-    $result = $this->executeQueryWithParams($query, [':name' => $name]);
+  public function getUserByEmail($email) {
+    $query = $this->db->prepare('select * from users where email = :email');
+    $result = $this->executeQueryWithParams($query, [':email' => $email]);
     return !empty($result) ? $result[0] : null;
   }
+
+  public function createUser($name, $email, $pass) {
+    $pass = password_hash($pass, PASSWORD_BCRYPT);
+    $query = $this->db->prepare("INSERT INTO users(username, email, password, admin) VALUES (:name, :email, :pass, 0)");
+    $this->executeQueryWithParams($query, [':name' => $name, ':email' => $email, ':pass' => $pass]);
+  } 
 }

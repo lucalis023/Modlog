@@ -15,9 +15,19 @@ class loginController extends BaseController {
       $this->handleLogin();
 
     } else {
-      $this->view->renderLogin([]);
+      switch ($params[0]) {
+        case 'login':
+          $this->view->renderLogin([]);
+          break;
+        case 'register':
+          $this->view->renderRegister([]);
+          break;
+        default: 
+          $this->view->renderLogin([]);
+      }
     }
   }
+
 
   public function handleLogin() {
     $action = $_POST['action'] ?? null;
@@ -27,14 +37,20 @@ class loginController extends BaseController {
         break;
       case 'log-out':
         $this->logOut($_POST['url']);
+        break;
+      case 'register': 
+        $this->register();
+        break;
     }
   }
 
+
   public function logIn() {
-    $name = $_POST['user'] ?? null;
+    $email = $_POST['email'] ?? null;
     $pass = $_POST['pass'] ?? null;
 
-    $user = $this->model->getUserByName($name);
+    $user = $this->model->getUserByEmail($email);
+
     if (!empty($user)) {
       if (password_verify($pass, $user->password)) {
         $this->setUser($user->id, $user->username);
@@ -45,14 +61,27 @@ class loginController extends BaseController {
         $this->view->renderLogin($this->data);
       }
     } else {
-      $this->setData('wrongUser', true);
+      $this->setData('wrongEmail', true);
       $this->view->renderLogin($this->data);
     }
   }
+
 
   public function logOut($url) {
     unset($_SESSION['user_id']);
     unset($_SESSION['user_name']);
     header('Location: ' . $url);
+  }
+
+
+  public function register() {
+    $user = $_POST['user'] ?? null;
+    $email = $_POST['email'] ?? null;
+    $pass = $_POST['pass'] ?? null;
+
+    if (!empty($user) && !empty($email) && !empty($pass)) {
+      $this->model->createUser($user, $email, $pass);
+      header('Location: ' . BASE_URL . 'login/');
+    }
   }
 }

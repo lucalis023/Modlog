@@ -4,12 +4,12 @@ require_once '../config/db.php';
 require_once './routes.php';
 
 $action = 'games';
+session_start();
 
 if (!empty($_GET['action'])) {
   $action = $_GET['action'];
 }
 
-session_start();
 try {
   $params = explode("/", $action);
   if(!key_exists($params[0], $routes)){
