@@ -33,9 +33,10 @@ abstract class ViewController {
     $this->setData('tittle', 'Modlog: ' . $value);
   }
 
-  public function setUser($id, $username) {
+  public function setUser($id, $username, $admin) {
     $_SESSION['user_id'] = $id;
     $_SESSION['user_name'] = $username;
+    $_SESSION['admin'] = $admin == 1 ? true : false;
   }
 
   public abstract function showPage($params = null);

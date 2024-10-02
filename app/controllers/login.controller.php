@@ -53,7 +53,7 @@ class loginController extends BaseController {
 
     if (!empty($user)) {
       if (password_verify($pass, $user->password)) {
-        $this->setUser($user->id, $user->username);
+        $this->setUser($user->id, $user->username, $user->id);
         header('Location: '. BASE_URL);
 
       } else {
@@ -70,6 +70,7 @@ class loginController extends BaseController {
   public function logOut($url) {
     unset($_SESSION['user_id']);
     unset($_SESSION['user_name']);
+    unset($_SESSION['admin']);
     header('Location: ' . $url);
   }
 
