@@ -12,7 +12,7 @@ class adminController extends ViewController {
       header('Location: ' . BASE_URL);
     }
 
-    if ($this->isNotEmpty($params[1])) {
+    if ($this->isNotEmpty($params[1]) && $this->isNotEmpty($params[2])) {
       switch ($params[1]) {
         case 'games':
           $this->handleGames($params);
@@ -22,53 +22,57 @@ class adminController extends ViewController {
   }
 
   public function handleGames($params) {
-    if ($this->isNotEmpty($params[2])) {
-      require_once '../app/models/games.model.php';
-      $model = new gamesModel;
+    require_once '../app/models/games.model.php';
+    $model = new gamesModel;
 
-      if ($params[2] == 'new') {
-        $this->addGame($model);
-      } else {
-        $this->editGame($model, $params);
+    // Runs if request comes from form
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      switch ($params[2]) {
+        case 'new':
+          $this->addGame($model);
+          break;
+        case 'delete':
+          $this->deleteGame($model, $params);
+          break;
+        default:
+          $this->editGame($model, $params);
+          break;
+      }
+      header('Location: ' . BASE_URL);
+
+    } else {
+      // Executes if page opened through <a>
+      switch ($params[2]) {
+        case 'new':
+          $this->view->renderAddGame([]);
+          break;
+        default:
+          $game = $model->getGameById($params[2]);
+          if (!empty($game)) {
+            $this->setData('game', $game);
+            $this->view->renderEditGame($this->data);
+          } else {
+            header('Location: ' . BASE_URL);
+          }
+          break;
       }
     }
   }
 
   public function addGame($model) {
-    // Executes on add submit
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $name = $_POST['name'] ?? null;
-      $description = $_POST['description'] ?? null;
-      $model->createGame($name, $description);
-      header('Location: ' . BASE_URL);
-    } else {
-      // Executes to load add page otherwise
-      $this->view->renderAddGame([]);
-    }
+    $name = $_POST['name'] ?? null;
+    $description = $_POST['description'] ?? null;
+    $model->createGame($name, $description);
   }
 
   public function editGame($model, $params) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // Executes if controller is loaded from edit page
-      if (isset($params[3]) && $params[3] == 'delete') {
-        // Deletes game
-        $model->deleteGame($params[2]);
-        header('Location: ' . BASE_URL);
+    $name = $_POST['name'] ?? null;
+    $description = $_POST['description'] ?? null;
+    $model->updateGame($name, $description, $params[2]);
+  }
 
-      } else {
-        // Edits game
-        $name = $_POST['name'] ?? null;
-        $description = $_POST['description'] ?? null;
-        $model->updateGame($name, $description, $params[2]);
-        header('Location: ' . BASE_URL);
-      }
-    } else {
-      // Loads edit page normally otherwise
-      $game = $model->getGameById($params[2]);
-      if (!empty($game)) {
-        $this->setData('game', $game);
-        $this->view->renderEditGame($this->data);
-      }
-    }
+  public function deleteGame($model, $params) {
+    if ($this->isNotEmpty($params[3]))
+      $model->deleteGame($params[3]);
   }
 }
