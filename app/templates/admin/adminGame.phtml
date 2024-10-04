@@ -1,0 +1,17 @@
+<form method="POST">
+  <label for="name">
+    Name: 
+    <input type="text" name="name" value="<?= $game->name ?? null?>" required>
+  </label>
+  <label for="description">
+    Description: 
+    <input type="text" name="description" value="<?= $game->description ?? null?>" required>
+  </label>
+
+  <?php if ($mode == 'edit') { ?> 
+    <button type="submit" formaction="<?= BASE_URL . 'admin/games/' . $game->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/games/delete/' . $game->id ?>">Delete</button>
+  <?php } else { ?>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/games/new' ?>">Add</button>
+  <?php } ?>
+</form>

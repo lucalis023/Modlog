@@ -18,4 +18,19 @@ class categoriesModel extends Model {
     $result = $this->executeQueryWithParams($query, [$game_id]);
     return $result;
   }
+
+  public function createCategory($name, $game_id) {
+    $query = $this->db->prepare("INSERT INTO categories(name, id_game) VALUES (:name, :id_game)");
+    $this->executeQueryWithParams($query, [':name' => $name, ':id_game' => $game_id]);
+  }
+
+  public function updateCategory($name, $id) {
+    $query = $this->db->prepare("UPDATE categories SET name=:name WHERE id = :id");
+    $this->executeQueryWithParams($query, [':name' => $name, ':id' => $id]);
+  }
+
+  public function deleteCategory($id) {
+    $query = $this->db->prepare("DELETE FROM categories WHERE id = :id");
+    $this->executeQueryWithParams($query, [':id' => $id]);
+  }
 }

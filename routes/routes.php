@@ -12,9 +12,9 @@ $routes = [
     'controller' => '../app/controllers/modpage.controller.php',
     'class' => 'modpageController'
   ],
-  'creator' => [
-    'controller' => '../app/controllers/creator.controller.php',
-    'class' => 'creatorController'
+  'creators' => [
+    'controller' => '../app/controllers/creators.controller.php',
+    'class' => 'creatorsController'
   ],
   'login' => [
     'controller' => '../app/controllers/login.controller.php',

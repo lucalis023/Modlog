@@ -1,0 +1,17 @@
+<form method="POST">
+  <label for="name">
+    Name: 
+    <input type="text" name="name" value="<?= $creator->name ?? null?>" required>
+  </label>
+  <label for="link">
+    Profile link: 
+    <input type="text" name="link" value="<?= $creator->profile_link ?? null?>" required>
+  </label>
+
+  <?php if ($mode == 'edit') { ?> 
+    <button type="submit" formaction="<?= BASE_URL . 'admin/creators/' . $creator->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/creators/delete/' . $creator->id ?>">Delete</button>
+  <?php } else { ?>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/creators/new' ?>">Add</button>
+  <?php } ?>
+</form>

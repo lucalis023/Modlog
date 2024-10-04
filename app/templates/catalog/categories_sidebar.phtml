@@ -1,9 +1,17 @@
 <form method="post">
   <ul>
     <?php foreach ($categories as $category): ?>
-      <li><button type="submit" formaction="<?= BASE_URL . 'catalog/' . $game->id . '/' . $category->id?>">
-        <?= $category->name?>
-      </button></li>
+      <li>
+        <button type="submit" formaction="<?= BASE_URL . 'catalog/' . $game->id . '/' . $category->id?>">
+          <?= $category->name?>
+        </button>
+        <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
+          <a href="<?= BASE_URL . 'admin/categories/' .$game->id . '/' . $category->id ?>">Edit</a>
+        <?php endif ?>
+      </li>
     <?php endforeach ?>
+    <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1): ?>
+      <li><a href="<?= BASE_URL . 'admin/categories/' . $game->id . '/new' ?>">Add new category</a></li>
+    <?php endif ?>
   </ul>
 </form>
