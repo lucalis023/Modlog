@@ -92,60 +92,69 @@ class adminController extends ViewController {
     require_once '../app/models/categories.model.php';
     $categoriesModel = new categoriesModel;
 
-    require_once '../app/models/games.model.php';
-    $gamesModel = new gamesModel;
-    $game = $gamesModel->getGameById($params[2] ?? null);
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      switch ($params[3]) {
+      switch ($params[2]) {
         case 'new':
-          $this->addcategory($categoriesModel, $game->id);
+          $this->addcategory($categoriesModel);
           break;
         case 'delete':
-          $this->deleteCategory($categoriesModel, $params);
+          $this->deleteCategory($categoriesModel);
           break;
         default:
-          $this->editCategory($categoriesModel, $params);
+          $this->editCategory($categoriesModel);
           break;
       }
-      header('Location: ' . BASE_URL . 'catalog/' . $game->id);
+
+      header('Location: ' . BASE_URL);
       
     } else {
       // Executes if page opened through <a>
-      switch ($params[3]) {
+
+      require_once '../app/models/games.model.php';
+      $gamesModel = new gamesModel;
+      $games = $gamesModel->getGames();
+      $this->setData('games', $games);
+
+      switch ($params[2]) {
         case 'new':
           $this->setData('mode', 'add');
-          $this->setData('game', $game);
           $this->view->renderCategory($this->data);
           break;
         default:
           $this->setData('mode', 'edit');
-          $category = $categoriesModel->getCategoryById($params[3]);
-          if (!empty($category)) {
+          $category = $categoriesModel->getCategoryById($params[2]);
+
+          if ($this->isNotEmpty($category)) {
             $this->setData('category', $category);
-            $this->setData('game', $game);
+
             $this->view->renderCategory($this->data);
+
           } else {
-            header('Location: ' . BASE_URL . 'catalog/' . $game->id);
+            header('Location: ' . BASE_URL);
           }
           break;
       }
     }
   }
   
-  public function addCategory($model, $game_id) {
+  public function addCategory($model) {
     $name = $_POST['name'] ?? null;
+    $game_id = $_POST['game'] ?? null;
+    echo $name . ' ' . $game_id;
     $model->createCategory($name, $game_id);
   }
   
-  public function editCategory($model, $params) {
+  public function editCategory($model) {
+    $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
-    $model->updateCategory($name, $params[3]);
+    $game_id = $_POST['game'] ?? null;
+    $model->updateCategory($name, $id, $game_id);
   }
   
-  public function deleteCategory($model, $params) {
-    if ($this->isNotEmpty($params[4]))
-      $model->deleteCategory($params[4]);
+  public function deleteCategory($model) {
+    $id = $_POST['id'] ?? null;
+    if ($this->isNotEmpty($id))
+      $model->deleteCategory($id);
   }
 
 

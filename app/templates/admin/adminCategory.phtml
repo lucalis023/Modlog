@@ -1,7 +1,16 @@
 <form method="POST">
-<label for="game">
+  <input type="hidden" name="id" value="<?= $category->id ?? null ?>">
+  <label for="game">
     Game: 
-    <input type="text" name="game" value="<?= $game->name ?? null?>" required disabled>
+    <select name="game" id="game" required>
+      <option value="" selected disabled>-</option>
+      <?php foreach($games as $game) : ?>
+        <option value="<?= $game->id?>"  
+          <?= isset($category) ? ($category->id_game == $game->id ? 'selected' : '') : '' ?> >
+          <?= $game->name ?>
+        </option>
+      <?php endforeach?>
+    </select>
   </label>
   <label for="name">
     Name: 
@@ -9,9 +18,9 @@
   </label>
 
   <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'admin/categories/' . $game->id . '/' . $category->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/categories/' . $game->id .'/delete/' . $category->id ?>">Delete</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/categories/' . $category->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/categories/delete/' . $category->id ?>">Delete</button>
   <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/categories/' . $game->id . '/new' ?>">Add</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/categories/new' ?>">Add</button>
   <?php } ?>
 </form>
