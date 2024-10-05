@@ -19,19 +19,19 @@ class creatorsModel extends Model {
     return $result;
   }
 
-  public function createCreator($name, $link) {
+  public function create($data) {
+    extract($data);
     $query = $this->db->prepare("INSERT INTO creators(name, profile_link) VALUES (:name, :link)");
     $this->executeQueryWithParams($query, [':name' => $name, ':link' => $link]);
   }
 
-  public function updateCreator($id, $name, $link) {
-    echo 'Update ' . $id;
+  public function update($data) {
+    extract($data);
     $query = $this->db->prepare("UPDATE creators SET name=:name, profile_link=:link WHERE id = :id");
     $this->executeQueryWithParams($query, [':name' => $name, ':link' => $link, ':id' => $id]);
   }
 
-  public function deleteCreator($id) {
-    echo 'Delete ' . $id;
+  public function delete($id) {
     $query = $this->db->prepare("DELETE FROM creators WHERE id = :id");
     $this->executeQueryWithParams($query, [':id' => $id]);
   }

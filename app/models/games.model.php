@@ -18,17 +18,19 @@ class gamesModel extends Model {
     if (!empty($result)) return $result[0];
   }
 
-  public function createGame($name, $description) {
+  public function create($data) {
+    extract($data);
     $query = $this->db->prepare("INSERT INTO games(name, mods_ammount, description) VALUES (:name, 0, :description)");
     $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description]);
   }
 
-  public function updateGame($name, $description, $id) {
+  public function update($data) {
+    extract($data);
     $query = $this->db->prepare("UPDATE games SET name=:name, description=:description WHERE id = :id");
     $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':id' => $id]);
   }
 
-  public function deleteGame($id) {
+  public function delete($id) {
     $query = $this->db->prepare("DELETE FROM `games` WHERE id = :id");
     $this->executeQueryWithParams($query, [':id' => $id]);
   }

@@ -1,4 +1,5 @@
 <form method="POST">
+  <input type="hidden" name="id" value="<?= $creator->id ?? null ?>">  
   <label for="name">
     Name: 
     <input type="text" name="name" value="<?= $creator->name ?? null?>" required>
