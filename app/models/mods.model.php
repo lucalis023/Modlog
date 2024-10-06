@@ -29,4 +29,21 @@ class modsModel extends Model {
     $result = $this->executeQueryWithParams($query, [':game_id' => $game_id, ':category_id' => $category_id]);
     return $result;
   }
+
+  public function create($data) {
+    extract($data);
+    $query = $this->db->prepare("INSERT INTO mods(game_id, category_id, creator_id, name, description, creation_date, github_link, download_link) VALUES (:game, :category, :creator, :name, :description, :creation_date, :github_link, :download_link)");
+    $this->executeQueryWithParams($query, [':game' => $game, ':category' => $category, ':creator' => $creator, ':name' => $name, ':description' => $description, ':creation_date' => $creation_date, ':github_link' => $github_link, ':download_link' => $download_link]);
+  }
+
+  public function update($data) {
+    extract($data);
+    $query = $this->db->prepare("UPDATE mods SET game_id=:game, category_id=:category, creator_id=:category, name=:name, description=:description, creation_date=:creation_date, github_link=:github_link, download_link=:download_link WHERE id = :id");
+    $this->executeQueryWithParams($query, [':game' => $game, ':category' => $category, ':creator' => $creator, ':name' => $name, ':description' => $description, ':creation_date' => $creation_date, ':github_link' => $github_link, ':download_link' => $download_link, ':id' => $id]);
+  }
+
+  public function delete($id) {
+    $query = $this->db->prepare("DELETE FROM mods WHERE id = :id");
+    $this->executeQueryWithParams($query, [':id' => $id]);
+  }
 }

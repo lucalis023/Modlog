@@ -23,6 +23,9 @@ class adminController extends ViewController {
         case 'creators':
           $this->handleCreators($params);
           break;
+        case 'mods':
+          $this->handleMods($params);
+          break;
         default:
           header('Location: ' . BASE_URL);
       }
@@ -88,9 +91,7 @@ class adminController extends ViewController {
       // Executes if page opened through <a>
 
       require_once '../app/models/games.model.php';
-      $gamesModel = new gamesModel;
-      $games = $gamesModel->getGames();
-      $this->setData('games', $games);
+      $this->setData('games', (new gamesModel)->getGames());
 
       switch ($params[2]) {
         case 'new':
@@ -135,6 +136,45 @@ class adminController extends ViewController {
             $this->view->renderCreator($this->data);
           } else {
             header('Location: ' . BASE_URL . 'creators');
+          }
+          break;
+      }
+    }
+  }
+
+  public function handleMods($params) {
+    require_once '../app/models/mods.model.php';
+    $modsModel = new modsModel;
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Runs if request comes from form
+      $this->handleCRUD($modsModel, $params[2]);
+      header('Location: ' . BASE_URL);
+      
+    } else {
+      // Executes if page opened through <a>
+      require_once '../app/models/games.model.php';
+      $this->setData('games', (new gamesModel)->getGames());
+
+      require_once '../app/models/categories.model.php';
+      $this->setData('categories', (new categoriesModel)->getCategories());
+
+      require_once '../app/models/creators.model.php';
+      $this->setData('creators', (new creatorsModel)->getCreators());
+
+      switch ($params[2]) {
+        case 'new':
+          $this->setData('mode', 'add');
+          $this->view->renderMod($this->data);
+          break;
+        default:
+          $this->setData('mode', 'edit');
+          $mod = $modsModel->getModById($params[2]);
+          if ($this->isNotEmpty($mod)) {
+            $this->setData('mod', $mod);
+            $this->view->renderMod($this->data);
+          } else {
+            header('Location: ' . BASE_URL);
           }
           break;
       }

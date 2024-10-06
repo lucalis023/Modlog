@@ -1,0 +1,73 @@
+<form method="POST">
+  <input type="hidden" name="id" value="<?= $mod->id ?? null ?>">
+  <label for="game">
+    Game: 
+    <select name="game" id="game" required>
+      <option value="" selected disabled>-</option>
+      <?php foreach($games as $game) : ?>
+        <option value="<?= $game->id?>"  
+          <?= isset($mod) ? ($mod->game_id == $game->id ? 'selected' : '') : '' ?> >
+          <?= $game->name ?>
+        </option>
+      <?php endforeach?>
+    </select>
+  </label>
+
+  <label for="category">
+    Category: 
+    <select name="category" id="category" required>
+      <option value="" selected disabled>-</option>
+      <?php foreach($categories as $category) : ?>
+        <option value="<?= $category->id?>"  
+          <?= isset($mod) ? ($mod->category_id == $category->id ? 'selected' : '') : '' ?> >
+          <?= $category->name ?>
+        </option>
+      <?php endforeach?>
+    </select>
+  </label>
+
+  <label for="name">
+    Name: 
+    <input type="text" name="name" value="<?= $mod->name ?? null?>" required>
+  </label>
+
+  <label for="creator">
+    Creator: 
+    <select name="creator" id="creator" required>
+      <option value="" selected disabled>-</option>
+      <?php foreach($creators as $creator) : ?>
+        <option value="<?= $creator->id?>"  
+          <?= isset($mod) ? ($mod->creator_id == $creator->id ? 'selected' : '') : '' ?> >
+          <?= $creator->name ?>
+        </option>
+      <?php endforeach?>
+    </select>
+  </label>
+
+  <label for="description">
+    Description: 
+    <input type="text" name="description" value="<?= $mod->description ?? null?>" required>
+  </label>
+
+  <label for="creation_date">
+    Creation date: 
+    <input type="date" name="creation_date" value="<?= $mod->creation_date ?? null?>" required>
+  </label>
+
+  <label for="github_link">
+    Github link: 
+    <input type="text" name="github_link" value="<?= $mod->github_link ?? null?>" required>
+  </label>
+
+  <label for="download_link">
+    Download link: 
+    <input type="text" name="download_link" value="<?= $mod->download_link ?? null?>" required>
+  </label>
+
+  <?php if ($mode == 'edit') { ?> 
+    <button type="submit" formaction="<?= BASE_URL . 'admin/mods/' . $category->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/mods/delete/' . $category->id ?>">Delete</button>
+  <?php } else { ?>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/mods/new' ?>">Add</button>
+  <?php } ?>
+</form>
