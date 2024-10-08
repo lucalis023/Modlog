@@ -12,8 +12,7 @@
     <h4>
       <?php if (isset($_SESSION['user_name'])) {?>
         <h4><?= $_SESSION['user_name'] ?></h4>
-        <form action="<?= BASE_URL . 'login' ?>" method="POST">
-          <input type="hidden" name="action" value="log-out">
+        <form action="<?= BASE_URL . 'logout' ?>" method="POST">
           <input type="hidden" name="url" value="<?= "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>">
           <button type="submit">Log out</button>
         </form>

@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/controllers/controllerTypes/ViewController.php';
+require_once './app/controllers/controllerTypes/ViewController.php';
 
 class modpageController extends ViewController {
   protected $modsModel;
@@ -8,20 +8,20 @@ class modpageController extends ViewController {
   protected $categoriesModel;
 
   public function __construct() {
-    require_once '../app/models/games.model.php';
+    require_once './app/models/games.model.php';
     $this->gamesModel = new gamesModel;
-    require_once '../app/models/mods.model.php';
+    require_once './app/models/mods.model.php';
     $this->modsModel = new modsModel;
-    require_once '../app/models/creators.model.php';
+    require_once './app/models/creators.model.php';
     $this->creatorsModel = new creatorsModel;
-    require_once '../app/models/categories.model.php';
+    require_once './app/models/categories.model.php';
     $this->categoriesModel = new categoriesModel;
-    require_once '../app/views/modpage.view.php';
+    require_once './app/views/modpage.view.php';
     parent::__construct(new modpageView, 'Modpage');
   }
 
-  public function showPage($params = null) {
-    $mod = $this->modsModel->getModById($params[1]);
+  public function showPage($params) {
+    $mod = $this->modsModel->getModById($params['id']);
     if ($this->isNotEmpty($mod)){
       $this->setTittle($mod->name);
       $this->setData('mod', $mod);

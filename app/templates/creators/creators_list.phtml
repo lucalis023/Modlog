@@ -1,15 +1,15 @@
 <ul>
   <?php foreach ($creators as $creator) : ?>
     <li>
-      <a href="<?= BASE_URL . 'creators/' . $creator->id ?>"><?= $creator->name ?></a>
+      <a href="<?= BASE_URL . 'creator/' . $creator->id ?>"><?= $creator->name ?></a>
       <?php if (isset($_SESSION['admin'])  && $_SESSION['admin'] == 1): ?>
-        <a href="<?= BASE_URL . 'admin/creators/' . $creator->id ?>">Edit</a>
+        <a href="<?= BASE_URL . 'admin/creator/' . $creator->id ?>">Edit</a>
       <?php endif ?>
     </li>
   <?php endforeach ?>
   <?php if (isset($_SESSION['admin'])  && $_SESSION['admin'] == 1): ?>
     <li>
-      <a href="<?= BASE_URL . 'admin/creators/new' ?>">Add</a>
+      <a href="<?= BASE_URL . 'admin/creator/new' ?>">Add</a>
     </li>
   <?php endif ?>
 </ul>

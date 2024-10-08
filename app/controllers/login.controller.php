@@ -1,88 +1,64 @@
 <?php
 
-require_once '../app/controllers/controllerTypes/BaseController.php';
+require_once './app/controllers/controllerTypes/BaseController.php';
 
 class loginController extends BaseController {
 
   public function __construct() {
-    require_once '../app/models/users.model.php';
-    require_once '../app/views/login.view.php';
+    require_once './app/models/users.model.php';
+    require_once './app/views/login.view.php';
     parent::__construct(new usersModel, new loginView, 'Login');
   }
 
-  public function showPage($params = null) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $this->handleLogin();
-
-    } else {
-      switch ($params[0]) {
-        case 'login':
-          $this->view->renderLogin([]);
-          break;
-        case 'register':
-          $this->view->renderRegister([]);
-          break;
-        default: 
-          $this->view->renderLogin([]);
-      }
-    }
-  }
-
-
   public function handleLogin() {
-    $action = $_POST['action'] ?? null;
-    switch ($action) {
-      case 'log-in': 
-        $this->logIn();
-        break;
-      case 'log-out':
-        $this->logOut($_POST['url']);
-        break;
-      case 'register': 
-        $this->register();
-        break;
-    }
-  }
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $email = $_POST['email'] ?? null;
+      $pass = $_POST['pass'] ?? null;
 
+      $user = $this->model->getUserByEmail($email);
 
-  public function logIn() {
-    $email = $_POST['email'] ?? null;
-    $pass = $_POST['pass'] ?? null;
+      if (!empty($user)) {
+        if (password_verify($pass, $user->password)) {
+          $this->setUser($user->id, $user->username, $user->id);
+          header('Location: '. BASE_URL);
 
-    $user = $this->model->getUserByEmail($email);
-
-    if (!empty($user)) {
-      if (password_verify($pass, $user->password)) {
-        $this->setUser($user->id, $user->username, $user->id);
-        header('Location: '. BASE_URL);
-
+        } else {
+          $this->setData('wrongPass', true);
+          $this->view->renderLogin($this->data);
+        }
       } else {
-        $this->setData('wrongPass', true);
+        $this->setData('wrongEmail', true);
         $this->view->renderLogin($this->data);
       }
     } else {
-      $this->setData('wrongEmail', true);
-      $this->view->renderLogin($this->data);
+       $this->view->renderLogin([]);
     }
   }
 
 
-  public function logOut($url) {
-    unset($_SESSION['user_id']);
-    unset($_SESSION['user_name']);
-    unset($_SESSION['admin']);
-    header('Location: ' . $url);
+  public function handleLogout() {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+      $url = $_POST['url'] ?? BASE_URL;
+      unset($_SESSION['user_id']);
+      unset($_SESSION['user_name']);
+      unset($_SESSION['admin']);
+      header('Location: ' . $url);
+    }
   }
 
 
-  public function register() {
-    $user = $_POST['user'] ?? null;
-    $email = $_POST['email'] ?? null;
-    $pass = $_POST['pass'] ?? null;
+  public function handleRegister() {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $user = $_POST['user'] ?? null;
+      $email = $_POST['email'] ?? null;
+      $pass = $_POST['pass'] ?? null;
 
-    if (!empty($user) && !empty($email) && !empty($pass)) {
-      $this->model->createUser($user, $email, $pass);
-      header('Location: ' . BASE_URL . 'login/');
+      if (!empty($user) && !empty($email) && !empty($pass)) {
+        $this->model->createUser($user, $email, $pass);
+        header('Location: ' . BASE_URL . 'login/');
+      }
+    } else {
+      $this->view->renderRegister([]);
     }
   }
 }

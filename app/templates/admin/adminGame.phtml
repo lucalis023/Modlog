@@ -14,9 +14,9 @@
   </label>
 
   <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'admin/games/' . $game->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/games/delete/' . $game->id ?>">Delete</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/game/' . $game->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/game/delete/' . $game->id ?>">Delete</button>
   <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/games/new' ?>">Add</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/game/new' ?>">Add</button>
   <?php } ?>
 </form>

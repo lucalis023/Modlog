@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/models/Model.php';
+require_once './app/models/Model.php';
 
 class gamesModel extends Model {
   
@@ -20,7 +20,7 @@ class gamesModel extends Model {
 
   public function create($data) {
     extract($data);
-    $query = $this->db->prepare("INSERT INTO games(name, mods_ammount, description, :image) VALUES (:name, 0, :description, :image)");
+    $query = $this->db->prepare("INSERT INTO games(name, mods_ammount, description, image) VALUES (:name, 0, :description, :image)");
     $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':image' => $image ?? null]);
   }
 

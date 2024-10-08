@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/views/View.php';
+require_once './app/views/View.php';
 
 class adminView extends View{
   public function renderGame($data) {

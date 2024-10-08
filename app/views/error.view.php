@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/views/View.php';
+require_once './app/views/View.php';
 
 class errorView extends View {
   public function renderDefaultError($err) {

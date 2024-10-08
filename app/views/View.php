@@ -4,11 +4,11 @@ class View {
   protected $templates = [];
 
   public function renderHeader() {
-    require_once '../app/templates/header.phtml';
+    require_once './app/templates/header.phtml';
   }
 
   public function renderFooter() {
-    require_once '../app/templates/footer.phtml';
+    require_once './app/templates/footer.phtml';
   }
 
   public function renderPage($data) {
@@ -21,7 +21,7 @@ class View {
   }
 
   public function addTemplate($template) {  
-    $template = '../app/templates' . $template;
+    $template = './app/templates' . $template;
     array_push($this->templates, $template);
   }
 }

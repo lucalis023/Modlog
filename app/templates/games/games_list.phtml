@@ -9,11 +9,11 @@
         <?= $game->name ?>: <?= $game->mods_ammount ?> mods.
       </a>
       <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
-        <a href="<?= BASE_URL . 'admin/games/' . $game->id ?>">Edit</a>
+        <a href="<?= BASE_URL . 'admin/game/' . $game->id ?>">Edit</a>
       <?php endif ?>
     </li>
   <?php endforeach ?>
   <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
-    <a href="<?= BASE_URL . 'admin/games/new' ?>">Add game</a>
+    <a href="<?= BASE_URL . 'admin/game/new' ?>">Add game</a>
   <?php endif ?>
 </ul>

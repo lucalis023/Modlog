@@ -1,12 +1,12 @@
 <?php
 
-require_once '../app/controllers/controllerTypes/ViewController.php';
+require_once './app/controllers/controllerTypes/ViewController.php';
 
 class errorController {
   protected $view;
 
   public function __construct() {
-    require_once '../app/views/error.view.php';
+    require_once './app/views/error.view.php';
     $this->view = new errorView;
   }
 

@@ -1,20 +1,13 @@
 <form method="POST" enctype="multipart/form-data">
   <input type="hidden" name="id" value="<?= $mod->id ?? null ?>">
+  <input type="hidden" name="game" value="<?= $game->id ?>">
   <label for="image"> 
     Image:
     <input type="file" name="image" accept=".jpg,.jpeg,.png,.gif">
   </label>
   <label for="game">
     Game: 
-    <select name="game" id="game" required>
-      <option value="" selected disabled>-</option>
-      <?php foreach($games as $game) : ?>
-        <option value="<?= $game->id?>"  
-          <?= isset($mod) ? ($mod->game_id == $game->id ? 'selected' : '') : '' ?> >
-          <?= $game->name ?>
-        </option>
-      <?php endforeach?>
-    </select>
+    <input type="text" value="<?= $game->name ?>" disabled>
   </label>
 
   <label for="category">
@@ -69,9 +62,9 @@
   </label>
 
   <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'admin/mods/' . $category->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/mods/delete/' . $category->id ?>">Delete</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/mod/' . $game->id . '/' . $mod->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/mod/delete/' . $mod->id ?>">Delete</button>
   <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/mods/new' ?>">Add</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/mod/' . $game->id . '/new' ?>">Add</button>
   <?php } ?>
 </form>

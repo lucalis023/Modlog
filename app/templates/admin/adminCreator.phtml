@@ -10,9 +10,9 @@
   </label>
 
   <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'admin/creators/' . $creator->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/creators/delete/' . $creator->id ?>">Delete</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/creator/' . $creator->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/creator/delete/' . $creator->id ?>">Delete</button>
   <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/creators/new' ?>">Add</button>
+    <button type="submit" formaction="<?= BASE_URL . 'admin/creator/new' ?>">Add</button>
   <?php } ?>
 </form>

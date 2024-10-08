@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/controllers/controllerTypes/ViewController.php';
+require_once './app/controllers/controllerTypes/ViewController.php';
 
 abstract class BaseController extends ViewController {
   protected $model;
@@ -8,6 +8,4 @@ abstract class BaseController extends ViewController {
     $this->model = $model;
     parent::__construct($view, $tittle);
   }
-
-  public abstract function showPage($params = null);
 }

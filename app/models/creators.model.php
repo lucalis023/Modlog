@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/models/Model.php';
+require_once './app/models/Model.php';
 
 class creatorsModel extends Model {
 

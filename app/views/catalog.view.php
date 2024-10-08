@@ -1,5 +1,5 @@
 <?php 
-require_once '../app/views/View.php';
+require_once './app/views/View.php';
 
 class catalogView extends View{
   public function renderCatalog($data) {
