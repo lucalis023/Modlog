@@ -2,7 +2,12 @@
 <ul>
   <?php foreach($games as $game): ?>
     <li>
-      <a href="<?= BASE_URL . 'catalog/' . $game->id ?>"><?= $game->name ?>: <?= $game->mods_ammount ?> mods.</a>
+      <a href="<?= BASE_URL . 'catalog/' . $game->id ?>">
+        <?php if (isset($game->image) && !empty($game->image)) : ?>
+          <img src="<?= $game->image ?>" alt="<?= $game->name ?> image">
+        <?php endif ?>
+        <?= $game->name ?>: <?= $game->mods_ammount ?> mods.
+      </a>
       <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
         <a href="<?= BASE_URL . 'admin/games/' . $game->id ?>">Edit</a>
       <?php endif ?>

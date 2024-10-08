@@ -1,7 +1,12 @@
 <ul>
   <?php foreach($mods as $mod): ?>
     <li>
-      <a href="<?= BASE_URL . 'modpage/' . $mod->id?>"><?= $mod->name ?></a>
+      <a href="<?= BASE_URL . 'modpage/' . $mod->id?>">
+        <?php if (isset($mod->image) && !empty($mod->image)) : ?>
+          <img src="<?= $mod->image ?>" alt="<?= $mod->name ?> image">
+        <?php endif ?>
+        <?= $mod->name ?>
+      </a>
       <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
         <a href="<?= BASE_URL . 'admin/mods/' . $mod->id ?>">Edit</a>
       <?php endif ?>

@@ -32,10 +32,25 @@ class adminController extends ViewController {
     }
   }
 
-  public function handleCRUD($model, $action) {
+  public function handleCRUD($model, $action, $table = '') {
     foreach ($_POST as $key => $value) {
       $this->setData($key, $value);
     } 
+
+    var_dump($_FILES);
+    if (isset($_FILES['image'])) {
+      $image = $_FILES['image'];
+      // Builds unique filename
+      $fileName = $_POST['name'] . '_' . md5(date('Y-m-d H:i:s')) . '.' . pathinfo($image['name'], PATHINFO_EXTENSION);
+      $uploadName = '../public/uploads/'. $table . '/' . $fileName;
+      $absoluteRoute = BASE_URL . 'public/uploads/' . $table . '/' . $fileName;
+
+
+      if (move_uploaded_file($image['tmp_name'], $uploadName)) {
+        $this->setData('image', $absoluteRoute);
+      }
+    }
+
     switch ($action) {
       case 'new':
         $model->create($this->data);
@@ -53,7 +68,7 @@ class adminController extends ViewController {
     require_once '../app/models/games.model.php';
     $model = new gamesModel;
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $this->handleCRUD($model, $params[2]);
+      $this->handleCRUD($model, $params[2], 'games');
       header('Location: ' . BASE_URL);
 
     } else {
@@ -148,7 +163,7 @@ class adminController extends ViewController {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // Runs if request comes from form
-      $this->handleCRUD($modsModel, $params[2]);
+      $this->handleCRUD($modsModel, $params[2], 'mods');
       header('Location: ' . BASE_URL);
       
     } else {

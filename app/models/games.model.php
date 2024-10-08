@@ -20,14 +20,14 @@ class gamesModel extends Model {
 
   public function create($data) {
     extract($data);
-    $query = $this->db->prepare("INSERT INTO games(name, mods_ammount, description) VALUES (:name, 0, :description)");
-    $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description]);
+    $query = $this->db->prepare("INSERT INTO games(name, mods_ammount, description, :image) VALUES (:name, 0, :description, :image)");
+    $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':image' => $image ?? null]);
   }
 
   public function update($data) {
     extract($data);
-    $query = $this->db->prepare("UPDATE games SET name=:name, description=:description WHERE id = :id");
-    $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':id' => $id]);
+    $query = $this->db->prepare("UPDATE games SET name=:name, description=:description, image=:image WHERE id = :id");
+    $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':image' => $image ?? null, ':id' => $id]);
   }
 
   public function delete($id) {
