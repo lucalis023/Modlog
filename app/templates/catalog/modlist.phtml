@@ -8,13 +8,13 @@
         <?= $mod->name ?>
       </a>
       <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
-        <a href="<?= BASE_URL . 'admin/mod/' . $mod->game_id . '/' . $mod->id ?>">Edit</a>
+        <a href="<?= BASE_URL . 'edit/mod/' . $mod->game_id . '/' . $mod->id ?>">Edit</a>
       <?php endif ?>
     </li>
   <?php endforeach?>
   <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
     <li>
-        <a href="<?= BASE_URL . 'admin/mod/' . $mod->game_id . '/new' ?>">Add new mod</a>
+        <a href="<?= BASE_URL . 'new/mod/' . $mod->game_id ?>">Add new mod</a>
     </li>
   <?php endif ?>
 </ul>

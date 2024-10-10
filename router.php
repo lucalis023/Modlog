@@ -23,14 +23,29 @@ $router->addRoute('logout', 'login', 'handleLogout');
 $router->addRoute('register', 'login', 'handleRegister');
 
 //Admin
-$router->addRoute('admin/game/:id', 'admin', 'handleGame');
-$router->addRoute('admin/game/delete/:id', 'admin', 'deleteGame');
-$router->addRoute('admin/category/delete/:id', 'admin', 'deleteCategory');
-$router->addRoute('admin/category/:game/:id', 'admin', 'handleCategory');
-$router->addRoute('admin/creator/:id', 'admin', 'handleCreator');
-$router->addRoute('admin/creator/delete/:id', 'admin', 'deleteCreator');
-$router->addRoute('admin/mod/delete/:id', 'admin', 'deleteMod');
-$router->addRoute('admin/mod/:game/:id', 'admin', 'handleMod');
+$router->addRoute('edit/game/:id', 'games', 'showEdit');
+$router->addRoute('new/game/', 'games', 'showNew');
+$router->addRoute('create/game/', 'games', 'create');
+$router->addRoute('update/game/:id', 'games', 'update');
+$router->addRoute('delete/game/:id', 'games', 'delete');
+
+$router->addRoute('edit/category/:game/:id', 'catalog', 'showEditCategory');
+$router->addRoute('new/category/:game/', 'catalog', 'showNewCategory');
+$router->addRoute('create/category/', 'catalog', 'createCategory');
+$router->addRoute('update/category/:id', 'catalog', 'updateCategory');
+$router->addRoute('delete/category/:id', 'catalog', 'deleteCategory');
+
+$router->addRoute('edit/mod/:game/:id', 'catalog', 'showEditMod');
+$router->addRoute('new/mod/:game/', 'catalog', 'showNewMod');
+$router->addRoute('create/mod/', 'catalog', 'createMod');
+$router->addRoute('update/mod/:id', 'catalog', 'updateMod');
+$router->addRoute('delete/mod/:id', 'catalog', 'deleteMod');
+
+$router->addRoute('edit/creator/:id', 'creators', 'showEdit');
+$router->addRoute('new/creator/', 'creators', 'showNew');
+$router->addRoute('create/creator/', 'creators', 'create');
+$router->addRoute('update/creator/:id', 'creators', 'update');
+$router->addRoute('delete/creator/:id', 'creators', 'delete');
 
 
 $router->route($action);

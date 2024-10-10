@@ -26,8 +26,15 @@ class gamesModel extends Model {
 
   public function update($data) {
     extract($data);
-    $query = $this->db->prepare("UPDATE games SET name=:name, description=:description, image=:image WHERE id = :id");
-    $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':image' => $image ?? null, ':id' => $id]);
+    $queryText = "UPDATE games SET name=:name, description=:description" .  (isset($image) ? ", image=:image " : ' ') . "WHERE id = :id";
+    $query = $this->db->prepare($queryText);
+    $vars = [
+      ':id' => $id,
+      ':name' => $name, 
+      ':description' => $description
+    ];
+    if (isset($image)) $vars[':image'] = $image;
+    $this->executeQueryWithParams($query, $vars);
   }
 
   public function delete($id) {

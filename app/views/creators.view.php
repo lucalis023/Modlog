@@ -15,4 +15,10 @@ class creatorsView extends View {
     $this->addTemplate('/creators/creators_list.phtml');
     $this->renderPage($data);
   }
+
+  public function renderAdmin($data) {
+    extract($data);
+    $this->addTemplate('/admin/adminCreator.phtml');
+    $this->renderPage($data);
+  }
 }

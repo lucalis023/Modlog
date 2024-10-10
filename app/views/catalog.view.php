@@ -14,4 +14,16 @@ class catalogView extends View{
 
     $this->renderPage($data);
   } 
+
+  public function renderAdminCategory($data) {
+    extract($data);
+    $this->addTemplate('/admin/adminCategory.phtml');
+    $this->renderPage($data);
+  }
+
+  public function renderAdminMod($data) {
+    extract($data);
+    $this->addTemplate('/admin/adminMod.phtml');
+    $this->renderPage($data);
+  }
 }

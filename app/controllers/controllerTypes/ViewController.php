@@ -28,6 +28,11 @@ abstract class ViewController {
     $this->data[$key] = $value;
   }
 
+  public function setDataFromArray($array) {
+    foreach ($array as $key => $value) {
+      $this->setData($key, $value);
+    }
+  }
 
   public function setTittle($value) {
     $this->setData('tittle', 'Modlog: ' . $value);

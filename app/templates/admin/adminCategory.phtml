@@ -11,9 +11,9 @@
   </label>
 
   <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'admin/category/' . $game->id . '/' . $category->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/category/delete/' . $category->id ?>">Delete</button>
+    <button type="submit" formaction="<?= BASE_URL . 'update/category/' . $category->id ?>">Save</button>
+    <button type="submit" formaction="<?= BASE_URL . 'delete/category/' . $category->id ?>">Delete</button>
   <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'admin/category/' . $game->id . '/new' ?>">Add</button>
+    <button type="submit" formaction="<?= BASE_URL . 'create/category/' ?>">Add</button>
   <?php } ?>
 </form>

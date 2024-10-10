@@ -38,8 +38,21 @@ class modsModel extends Model {
 
   public function update($data) {
     extract($data);
-    $query = $this->db->prepare("UPDATE mods SET game_id=:game, category_id=:category, creator_id=:category, name=:name, description=:description, creation_date=:creation_date, github_link=:github_link, download_link=:download_link, image=:image WHERE id = :id");
-    $this->executeQueryWithParams($query, [':game' => $game, ':category' => $category, ':creator' => $creator, ':name' => $name, ':description' => $description, ':creation_date' => $creation_date, ':github_link' => $github_link, ':download_link' => $download_link, ':image' => $image ?? null, ':id' => $id]);
+    $queryText = "UPDATE mods SET game_id=:game, category_id=:category, creator_id=:category, name=:name, description=:description, creation_date=:creation_date, github_link=:github_link, download_link=:download_link" .  (isset($image) ? ", image=:image " : ' ') . "WHERE id = :id";
+    $query = $this->db->prepare($queryText);
+    $vars = [
+      ':id' => $id,
+      ':name' => $name, 
+      ':category' => $category,
+      ':creator' => $creator,
+      ':game' => $game,
+      ':description' => $description,
+      ':creation_date' => $creation_date,
+      ':github_link' => $github_link,
+      ':download_link' => $download_link,
+    ];
+    if (isset($image)) $vars[':image'] = $image;
+    $this->executeQueryWithParams($query, $vars);
   }
 
   public function delete($id) {
