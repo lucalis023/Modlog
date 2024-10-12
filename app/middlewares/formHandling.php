@@ -17,7 +17,7 @@ function createImage($folder) {
     // Builds unique filename
     $fileName = $_POST['name'] . '_' . md5(date('Y-m-d H:i:s')) . '.' . pathinfo($image['name'], PATHINFO_EXTENSION);
     $uploadName = './public/uploads/'. $folder . '/' . $fileName;
-    $absoluteRoute = BASE_URL . 'public/uploads/' . $folder . '/' . $fileName;
+    $absoluteRoute = 'public/uploads/' . $folder . '/' . $fileName;
 
     if (move_uploaded_file($image['tmp_name'], $uploadName)) {
       return $absoluteRoute;

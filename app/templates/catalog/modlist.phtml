@@ -3,7 +3,7 @@
     <li>
       <a href="<?= BASE_URL . 'modpage/' . $mod->id?>">
         <?php if (isset($mod->image) && !empty($mod->image)) : ?>
-          <img src="<?= $mod->image ?>" alt="<?= $mod->name ?> image">
+          <img src="<?= BASE_URL . $mod->image ?>" alt="<?= $mod->name ?> image">
         <?php endif ?>
         <?= $mod->name ?>
       </a>
