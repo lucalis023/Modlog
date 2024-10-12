@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?= BASE_URL . 'public/css/index.css' ?>">
+  <?php if(!empty($this->stylesheets)): 
+    foreach($this->stylesheets as $stylesheet):?>
+      <link rel="stylesheet" href="<?= $stylesheet ?>">
+  <?php endforeach; endif;?>
   <title><?= isset($tittle) ? $tittle : 'Modlog' ?></title>
 </head>
 <body>

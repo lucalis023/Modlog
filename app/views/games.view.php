@@ -11,6 +11,7 @@ class gamesView extends View {
 
   public function renderAdmin($data) {
     extract($data);
+    $this->addStylesheet('admin.css');
     $this->addTemplate('/admin/adminGame.phtml');
     $this->renderPage($data);
   }
