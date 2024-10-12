@@ -1,31 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 11:43 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `modlog`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
@@ -33,22 +9,18 @@ CREATE TABLE `categories` (
   `name` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `categories`
---
 
 INSERT INTO `categories` (`id`, `id_game`, `name`) VALUES
 (1, 1, 'Storage'),
 (2, 1, 'Magic'),
 (3, 2, 'Gameplay'),
 (4, 2, 'Parts pack'),
-(5, 2, 'Visual');
+(5, 2, 'Visual'),
+(23, 1, 'Information'),
+(24, 1, 'API & Tweeks'),
+(25, 1, 'Equipment'),
+(26, 16, 'Modding Tools');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `creators`
---
 
 CREATE TABLE `creators` (
   `id` int(11) NOT NULL,
@@ -56,40 +28,30 @@ CREATE TABLE `creators` (
   `profile_link` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `creators`
---
 
 INSERT INTO `creators` (`id`, `name`, `profile_link`) VALUES
 (1, 'Benjee10', 'https://github.com/benjee10'),
-(2, 'SuperMartijn642', 'https://www.curseforge.com/members/supermartijn642/projects');
+(2, 'SuperMartijn642', 'https://www.curseforge.com/members/supermartijn642/projects'),
+(9, 'mezz', 'https://www.curseforge.com/members/mezz/projects'),
+(10, 'shedaniel', 'https://www.curseforge.com/members/shedaniel/projects'),
+(11, 'TheIllusiveC4', 'https://www.curseforge.com/members/theillusivec4/projects'),
+(12, 'techbrew', 'https://www.curseforge.com/members/techbrew/projects'),
+(13, 'Pathoschild', 'https://next.nexusmods.com/profile/Pathoschild/about-me?gameId=1303');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `games`
---
 
 CREATE TABLE `games` (
   `id` int(11) NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `mods_ammount` int(11) NOT NULL DEFAULT 0,
-  `description` varchar(2048) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+  `description` varchar(2048) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 
---
--- Dumping data for table `games`
---
 
-INSERT INTO `games` (`id`, `name`, `mods_ammount`, `description`) VALUES
-(1, 'Minecraft', 2, 'Minecraft es un videojuego de construcción y exploración en un entorno de mundo abierto, creado por el desarrollador sueco Markus Persson, más conocido como \"Notch\". Inicialmente lanzó el juego bajo su estudio Mojang, que más tarde pasó a ser parte de Microsoft. La versión original del juego, conocida como Java Edition, fue programada en Java, mientras que más adelante se desarrolló una versión en C++, llamada Bedrock Edition. Minecraft vio la luz por primera vez el 17 de mayo de 2009 y, tras varios ajustes y mejoras, su versión estable 1.0 fue lanzada el 18 de noviembre de 2011.'),
-(2, 'Kerbal Space Program', 2, 'Kerbal Space Program, o KSP, es un simulador espacial donde los jugadores dirigen su propio programa espacial. El juego gira en torno a la construcción de cohetes, naves espaciales, vehículos de exploración y estaciones orbitales, con el objetivo de lanzarlos al espacio y realizar misiones a otros planetas o lunas dentro de un sistema planetario ficticio que recuerda al sistema solar.');
+INSERT INTO `games` (`id`, `name`, `description`, `image`) VALUES
+(1, 'Minecraft', 'Minecraft es un videojuego de construcción y exploración en un entorno de mundo abierto, creado por el desarrollador sueco Markus Persson, más conocido como ', '//localhost:80/Web2/Modlog/public/uploads/games/Minecraft_9f0fa896f8c3ace383ea6f3fdb6b832c.png'),
+(2, 'Kerbal Space Program', 'Kerbal Space Program, o KSP, es un simulador espacial donde los jugadores dirigen su propio programa espacial. El juego gira en torno a la construcción de cohetes, naves espaciales, vehículos de exploración y estaciones orbitales, con el objetivo de lanzarlos al espacio y realizar misiones a otros planetas o lunas dentro de un sistema planetario ficticio que recuerda al sistema solar.', '//localhost:80/Web2/Modlog/public/uploads/games/Kerbal Space Program_88d43cfd93c7043407d14c6af4988dd2.png'),
+(16, 'Stardew Valley', 'Stardew Valley es un juego de simulación en el que heredas una granja y debes restaurarla. Puedes cultivar, criar animales, pescar, minar y relacionarte con los habitantes del pueblo, mientras mejoras la granja y puedes formar una familia.', '//localhost:80/Web2/Modlog/public/uploads/games/Stardew Valley_8e926bae0ee766408d910082e5c6466c.png');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `mods`
---
 
 CREATE TABLE `mods` (
   `id` int(11) NOT NULL,
@@ -97,27 +59,25 @@ CREATE TABLE `mods` (
   `category_id` int(11) NOT NULL,
   `creator_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `description` varchar(2048) NOT NULL,
+  `description` varchar(2048) DEFAULT NULL,
   `creation_date` date NOT NULL,
-  `github_link` varchar(256) NOT NULL,
-  `download_link` varchar(256) NOT NULL
+  `github_link` varchar(256) DEFAULT NULL,
+  `download_link` varchar(256) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `mods`
---
 
-INSERT INTO `mods` (`id`, `game_id`, `category_id`, `creator_id`, `name`, `description`, `creation_date`, `github_link`, `download_link`) VALUES
-(1, 1, 1, 2, 'Trash Cans', 'Trash Cans adds Trash Cans which can be used to void items, fluids and energy! Items and Fluids can be whitelisted or blacklisted and an energy transfer limit can be set!', '2020-06-09', 'https://github.com/SuperMartijn642/TrashCans', 'https://www.curseforge.com/minecraft/mc-mods/trash-cans/files/all?page=1&pageSize=20'),
-(2, 1, 1, 2, 'Portable Tanks', 'Portable Tanks adds fluid tanks which keep their contents when picked up. You can change the input and output using an empty hand. The output state allows the tanks to output to blocks underneath them. ', '2021-07-14', 'https://github.com/Dremoline/PortableTanks', 'https://www.curseforge.com/minecraft/mc-mods/portable-tanks/files/all?page=1&pageSize=20'),
-(3, 2, 4, 1, 'Shuttle Orbiter Construction-Kit\r\n', 'This mod provides a set of parts designed to emulate the NASA Space Shuttle Orbiter. It works best paired with reDIRECT launch vehicle parts in a 2.5X scale solar system, but can be used however you please! Please consult the user manual for a brief guide on how to build and fly the Space Shuttle. ', '2021-04-29', 'https://github.com/benjee10/Shuttle-Orbiter-Construction-Kit/releases', 'https://spacedock.info/mod/2176/Shuttle%20Orbiter%20Construction%20Kit#changelog'),
-(4, 2, 4, 1, 'HabTech2', 'Parts designed to replicate the US Orbital Section (USOS) of the International Space Station:\r\n- Pressurised modules & cupola\r\n- Integrated Truss Structure & solar arrays, including iROSA\r\n- External payloads & experiments\r\n- Other structural pieces, science parts and antennas\r\n- Canadarm2 & Mobile Base System\r\n- New additions to the ISS such as BEAM, Bishop airlock, and more', '2023-02-18', 'https://github.com/benjee10/HabTech2', 'https://spacedock.info/mod/2078/HabTech2');
+INSERT INTO `mods` (`id`, `game_id`, `category_id`, `creator_id`, `name`, `description`, `creation_date`, `github_link`, `download_link`, `image`) VALUES
+(1, 1, 1, 1, 'Trash Cans', 'Trash Cans adds Trash Cans which can be used to void items, fluids and energy! Items and Fluids can be whitelisted or blacklisted and an energy transfer limit can be set!', '2020-06-09', 'https://github.com/SuperMartijn642/TrashCans', 'https://www.curseforge.com/minecraft/mc-mods/trash-cans/files/all?page=1&pageSize=20', NULL),
+(3, 2, 4, 1, 'Shuttle Orbiter Construction-Kit\r\n', 'This mod provides a set of parts designed to emulate the NASA Space Shuttle Orbiter. It works best paired with reDIRECT launch vehicle parts in a 2.5X scale solar system, but can be used however you please! Please consult the user manual for a brief guide on how to build and fly the Space Shuttle. ', '2021-04-29', 'https://github.com/benjee10/Shuttle-Orbiter-Construction-Kit/releases', 'https://spacedock.info/mod/2176/Shuttle%20Orbiter%20Construction%20Kit#changelog', NULL),
+(4, 2, 4, 1, 'HabTech2', 'Parts designed to replicate the US Orbital Section (USOS) of the International Space Station:\r\n- Pressurised modules & cupola\r\n- Integrated Truss Structure & solar arrays, including iROSA\r\n- External payloads & experiments\r\n- Other structural pieces, science parts and antennas\r\n- Canadarm2 & Mobile Base System\r\n- New additions to the ISS such as BEAM, Bishop airlock, and more', '2023-02-18', 'https://github.com/benjee10/HabTech2', 'https://spacedock.info/mod/2078/HabTech2', NULL),
+(10, 1, 23, 9, 'Just Enough Items', '', '2015-11-23', '', 'https://www.curseforge.com/minecraft/mc-mods/jei/files/all?page=1&pageSize=20', '//localhost:80/Web2/Modlog/public/uploads/mods/Just Enough Items_444686acd412d95ec363d602e4e8eea9.png'),
+(11, 1, 24, 10, 'Cloth Config API', 'Cloth Config API is a config screen api.', '2019-10-19', '', 'https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all?page=1&pageSize=20', '//localhost:80/Web2/Modlog/public/uploads/mods/Cloth Config API_e0dc11d7cc55d21298dceb42d57660e9.png'),
+(12, 1, 25, 11, 'Curios API', '', '2018-12-27', '', 'https://www.curseforge.com/minecraft/mc-mods/curios/files/all?page=1&pageSize=20', '//localhost:80/Web2/Modlog/public/uploads/mods/Curios API_b9a260f1171e12a9d748bdd60e1ddd2d.png'),
+(13, 1, 23, 12, 'JourneyMap', 'JourneyMap is a client+server mod for Forge or Fabric and Quilt which maps your Minecraft world in real-time as you explore. You can view the map in a web browser or in-game as a Minimap or full-screen. ', '2011-09-19', '', 'https://www.curseforge.com/minecraft/mc-mods/journeymap/files/all?page=1&pageSize=20', '//localhost:80/Web2/Modlog/public/uploads/mods/JourneyMap_e2b4f70a2939727c4c6fe13627c31b84.png'),
+(14, 16, 26, 13, 'SMAPI', 'SMAPI is the mod loader for Stardew Valley. It works fine with GOG and Steam achievements, its compatible with Linux/macOS/Windows, you can uninstall it anytime, and there"s a friendly community if you need help. SMAPI is required for most types of Stardew Valley mod.', '2018-06-16', '', 'https://www.nexusmods.com/stardewvalley/mods/2400?tab=files', '//localhost:80/Web2/Modlog/public/uploads/mods/SMAPI_9dfff72127c0a004628e93fec8605cdd.png'),
+(15, 16, 26, 13, 'Content Patcher', 'Content Patcher loads content packs that change the game"s data, images, and maps without replacing XNB files. Content packs can make changes dynamically based on many in-game details like location, weather, date, festivals or events, spouse, relationships, whether you have a Joja membership, etc.', '2018-02-25', 'https://github.com/Pathoschild/StardewMods/tree/stable/ContentPatcher', 'https://www.nexusmods.com/stardewvalley/mods/1915?tab=files', '//localhost:80/Web2/Modlog/public/uploads/mods/Content Patcher_c988aa2060fbd5227a72f7523c49e944.png');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -127,97 +87,62 @@ CREATE TABLE `users` (
   `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `categories`
---
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `admin`) VALUES
+(1, 'KK', 'leokessy2005@gmail.com', '$2y$10$i9AvtjUzTvU8WVCV58zjVup8gswlvXaV3MV1YQEIAs2OMwW3wdP6S', 1),
+(2, 'zz', 'zz@gmail.com', '$2y$10$wocO6toV5jvoFjOCOm3hteSJNSrgRafp5IL1jj3vYBEc9DReFS5/.', 0),
+(3, 'Josue', 'a@a', '$2y$10$AZHaCbje/3AHlYl8q2MLYewqATscGexPXjfEJ.MjsMNHgrE.9HQ5q', 0);
+
+
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_category_game_id` (`id_game`);
 
---
--- Indexes for table `creators`
---
 ALTER TABLE `creators`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `games`
---
+
 ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `mods`
---
+
 ALTER TABLE `mods`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_mod_game_id` (`game_id`),
   ADD KEY `FK_mod_category_id` (`category_id`),
-  ADD KEY `FK_mod_creator_id` (`creator_id`),
-  ADD KEY `FK_mod_game_id` (`game_id`);
+  ADD KEY `FK_mod_creator_id` (`creator_id`);
 
---
--- Indexes for table `users`
---
+
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `categories`
---
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
---
--- AUTO_INCREMENT for table `creators`
---
+
 ALTER TABLE `creators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
---
--- AUTO_INCREMENT for table `games`
---
+
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
---
--- AUTO_INCREMENT for table `mods`
---
+
 ALTER TABLE `mods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
---
--- AUTO_INCREMENT for table `users`
---
+
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `categories`
---
 ALTER TABLE `categories`
   ADD CONSTRAINT `FK_category_game_id` FOREIGN KEY (`id_game`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
---
--- Constraints for table `mods`
---
 ALTER TABLE `mods`
-  ADD CONSTRAINT `FK_mod_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_mod_creator_id` FOREIGN KEY (`creator_id`) REFERENCES `creators` (`id`) ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_mod_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_mod_creator_id` FOREIGN KEY (`creator_id`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_mod_game_id` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

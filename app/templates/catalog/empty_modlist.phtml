@@ -1,1 +1,4 @@
 <p>No mods where found for this game..</p>
+<?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
+    <a href="<?= BASE_URL . 'new/mod/' . $game->id ?>">Add new mod</a>
+  <?php endif ?>

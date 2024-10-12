@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+
+:root {
+  font-family: "Afacad Flux", sans-serif;
+  --header-main-color: #cf3032;
+  --header-sub-color: #b33234;
+  --footer-color: #2f2f3c;
+  --bg-color: #4f4f52;
+  --accent-color: #ec2f32;
+  --text-color: #2f2f3b;
+}
+
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+}
+
+a, a:visited {
+  color: var(--accent-color);
+}
+
+header {
+  width: 100vw;
+  background-color: var(--header-main-color);
+  position: sticky;
+  top: 0;
+}
+
+header a, header a:visited {
+  color: var(--text-color);
+}
+
+header div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+header nav {
+  padding: 0.5rem 1rem;
+  background-color: var(--header-sub-color);
+}
+
+header ul {
+  list-style-type: none;
+  display: flex;
+}
+
+header ul li {
+  padding-right: .4rem ;
+}
+
+main {
+  padding: 1rem 1.5rem;
+}
+
+main ul {
+  list-style-type: none;
+}
+
+main ul li a{
+  padding-right: .5rem;
+}
+
+main ul li a img{
+  padding-right: .5rem;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+}
+
+main form {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+}
+
+main form > *{
+  margin-bottom: 1rem;
+}
+
+main form button{
+  width: 20%;
+}
+
+
+footer {
+  width: 100vw;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  bottom: 0;
+  background: var(--footer-color);
+}

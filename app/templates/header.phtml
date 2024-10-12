@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="<?= BASE_URL . 'public/css/index.css' ?>">
   <title><?= isset($tittle) ? $tittle : 'Modlog' ?></title>
 </head>
 <body>
   <header>
-    <h1><a href="<?= BASE_URL ?>">Modlog</a></h1>
-    <h2><a href="<?= BASE_URL . 'creators '?>">Creators</a></h2>
-    <h4>
+    <div class="header-main">
+      <h1><a href="<?= BASE_URL ?>">Modlog</a></h1>
       <?php if (isset($_SESSION['user_name'])) {?>
-        <h4><?= $_SESSION['user_name'] ?></h4>
         <form action="<?= BASE_URL . 'logout' ?>" method="POST">
+          <h4><?= $_SESSION['user_name'] ?></h4>
           <input type="hidden" name="url" value="<?= "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>">
           <button type="submit">Log out</button>
         </form>
       <?php } else { ?>
         <a href="<?= BASE_URL . 'login'?>">Log in</a>
       <?php } ?>
-    </h4>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="<?= BASE_URL ?>">Home</a></li>
+        <li><a href="<?= BASE_URL . 'creators '?>">Creators</a></li>
+      </ul>
+    </nav>
   </header>
+  <main>
