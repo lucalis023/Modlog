@@ -61,10 +61,12 @@
     <input type="text" name="download_link" value="<?= $mod->download_link ?? null?>" required>
   </label>
 
-  <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'update/mod/' . $mod->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'delete/mod/' . $mod->id ?>">Delete</button>
-  <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'create/mod/' ?>">Add</button>
-  <?php } ?>
+  <div class="submits">
+    <?php if ($mode == 'edit') { ?> 
+      <button type="submit" formaction="<?= BASE_URL . 'update/mod/' . $mod->id ?>">Save</button>
+      <button type="submit" formaction="<?= BASE_URL . 'delete/mod/' . $mod->id ?>" class="delete">Delete</button>
+    <?php } else { ?>
+      <button type="submit" formaction="<?= BASE_URL . 'create/mod/' ?>">Add</button>
+    <?php } ?>
+  </div>
 </form>

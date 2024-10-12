@@ -13,10 +13,12 @@
     <input type="text" name="description" value="<?= $game->description ?? null?>" required>
   </label>
 
+  <div class="submits">
   <?php if ($mode == 'edit') { ?> 
     <button type="submit" formaction="<?= BASE_URL . 'update/game/' . $game->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'delete/game/' . $game->id ?>">Delete</button>
+    <button type="submit" formaction="<?= BASE_URL . 'delete/game/' . $game->id ?>" class="delete">Delete</button>
   <?php } else { ?>
     <button type="submit" formaction="<?= BASE_URL . 'create/game/' ?>">Add</button>
   <?php } ?>
+  </div>
 </form>

@@ -1,0 +1,29 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
+}
+
+main form {
+    display: flex;
+    width: 40vw;
+    flex-direction: column;
+    background: var(--dark-element-bg);
+    border-radius: .5rem;
+    padding: 1.5rem 2rem;
+}
+
+main form button {
+    border: 1px var(--text-color);
+    border-radius: .2rem;
+    padding: .2rem .5rem;
+}
+
+main form button:hover {
+    background-color: var(--btn-hover);
+}
+
+main form .delete:hover {
+    background-color: var(--btn-delete-hover);
+}

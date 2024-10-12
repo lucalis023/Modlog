@@ -18,6 +18,7 @@ class creatorsView extends View {
 
   public function renderAdmin($data) {
     extract($data);
+    $this->addStylesheet('admin.css');
     $this->addTemplate('/admin/adminCreator.phtml');
     $this->renderPage($data);
   }

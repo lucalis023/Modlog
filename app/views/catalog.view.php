@@ -17,12 +17,14 @@ class catalogView extends View{
 
   public function renderAdminCategory($data) {
     extract($data);
+    $this->addStylesheet('admin.css');
     $this->addTemplate('/admin/adminCategory.phtml');
     $this->renderPage($data);
   }
 
   public function renderAdminMod($data) {
     extract($data);
+    $this->addStylesheet('admin.css');
     $this->addTemplate('/admin/adminMod.phtml');
     $this->renderPage($data);
   }

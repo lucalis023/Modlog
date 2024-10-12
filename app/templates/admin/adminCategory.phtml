@@ -10,10 +10,12 @@
     <input type="text" name="name" value="<?= $category->name ?? null?>" required>
   </label>
 
-  <?php if ($mode == 'edit') { ?> 
-    <button type="submit" formaction="<?= BASE_URL . 'update/category/' . $category->id ?>">Save</button>
-    <button type="submit" formaction="<?= BASE_URL . 'delete/category/' . $category->id ?>">Delete</button>
-  <?php } else { ?>
-    <button type="submit" formaction="<?= BASE_URL . 'create/category/' ?>">Add</button>
-  <?php } ?>
+  <div class="submits">
+    <?php if ($mode == 'edit') { ?> 
+      <button type="submit" formaction="<?= BASE_URL . 'update/category/' . $category->id ?>">Save</button>
+      <button type="submit" formaction="<?= BASE_URL . 'delete/category/' . $category->id ?>" class="delete">Delete</button>
+    <?php } else { ?>
+      <button type="submit" formaction="<?= BASE_URL . 'create/category/' ?>">Add</button>
+    <?php } ?>
+  </div>
 </form>
