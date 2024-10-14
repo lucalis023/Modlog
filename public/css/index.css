@@ -4,11 +4,11 @@
   font-family: "Afacad Flux", sans-serif;
   --header-main-color: #cf3032;
   --header-sub-color: #b33234;
-  --footer-color: #2f2f3caf;
+  --footer-color: #2f2f3c;
   --bg-color: #4f4f52;
   --accent-color: #ec2f32;
   --text-color: #2f2f3b;
-  --dark-element-bg: #313131;
+  --darker-bg: #313131;
   --btn-hover: #c4c2e0;
   --btn-delete-hover: #da5558;
 }
@@ -22,6 +22,8 @@
 body {
   background-color: var(--bg-color);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a, a:visited {
@@ -29,7 +31,7 @@ a, a:visited {
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   background-color: var(--header-main-color);
   position: sticky;
   top: 0;
@@ -62,38 +64,24 @@ header ul li {
 }
 
 main {
-  width: 100vw;
-  padding: 1rem 1.5rem;
+  width: 100%;
 }
 
 main ul {
   list-style-type: none;
 }
 
-main ul li a{
-  padding-right: .5rem;
-}
-
 main ul li a img{
-  padding-right: .5rem;
   width: 3rem;
   height: 3rem;
   object-fit: cover;
 }
 
-main form > *{
-  margin-bottom: 1rem;
-}
-
-main form button{
-  width: 20%;
-}
-
-
 footer {
-  width: 100vw;
+  width: 100%;
   padding: 0.5rem 1rem;
-  position: absolute;
+  position: sticky;
+  margin-top: auto;
   bottom: 0;
   background: var(--footer-color);
 }

@@ -9,9 +9,13 @@ main form {
     display: flex;
     width: 40vw;
     flex-direction: column;
-    background: var(--dark-element-bg);
+    background: var(--darker-bg);
     border-radius: .5rem;
     padding: 1.5rem 2rem;
+}
+
+main form label {
+    margin-bottom: 1rem;
 }
 
 main form button {

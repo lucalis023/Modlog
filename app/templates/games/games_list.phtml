@@ -1,19 +1,25 @@
-<h1>Games</h1>
-<ul>
-  <?php foreach($games as $game): ?>
-    <li>
-      <a href="<?= BASE_URL . 'catalog/' . $game->id ?>">
-        <?php if (isset($game->image) && !empty($game->image)) : ?>
-          <img src="<?= BASE_URL . $game->image ?>" alt="<?= $game->name ?> image">
+<section class="list_section">
+  <h2>Games</h2>
+  <ul>
+    <?php foreach($games as $game): ?>
+      <li>
+        <a href="<?= BASE_URL . 'catalog/' . $game->id ?>">
+          <div class="img_cont">
+          <?php if (isset($game->image) && !empty($game->image)) : ?>
+            <img src="<?= BASE_URL . $game->image ?>" alt="<?= $game->name ?> image">
+          <?php endif ?>
+          </div>
+          <?= $game->name ?>
+        </a>
+        <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
+          <a href="<?= BASE_URL . 'edit/game/' . $game->id ?>">Edit</a>
         <?php endif ?>
-        <?= $game->name ?>
-      </a>
-      <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
-        <a href="<?= BASE_URL . 'edit/game/' . $game->id ?>">Edit</a>
-      <?php endif ?>
-    </li>
-  <?php endforeach ?>
-  <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
-    <a href="<?= BASE_URL . 'new/game/' ?>">Add game</a>
-  <?php endif ?>
-</ul>
+      </li>
+    <?php endforeach ?>
+    <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1): ?>
+      <li class="new">
+        <a href="<?= BASE_URL . 'new/game/' ?>">Add game</a>
+      </li>
+    <?php endif ?>
+  </ul>
+</section>

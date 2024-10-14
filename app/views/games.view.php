@@ -5,6 +5,7 @@ class gamesView extends View {
 
   public function renderGames($data) {
     extract($data);
+    $this->addStylesheet('games.css');
     $this->addTemplate('/games/games_list.phtml');
     $this->renderPage($data);
   }

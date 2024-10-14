@@ -82,7 +82,6 @@ class catalogController extends ViewController{
     $this->setData('creators', $this->creatorsModel->getCreators());
     $this->setData('mod', $this->modsModel->getModById($params['id']));
     $this->setData('mode', 'edit');
-    echo 'a';
     $this->view->renderAdminMod($this->data);
   }
 
