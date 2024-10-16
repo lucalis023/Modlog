@@ -8,7 +8,7 @@ class creatorsController extends ViewController {
   
   public function __construct(){
     require_once './app/views/creators.view.php';
-    parent::__construct(new creatorsView, 'Creator');
+    parent::__construct(new creatorsView, 'Creators');
     require_once './app/models/creators.model.php';
     $this->creatorModel = new creatorsModel;
     require_once './app/models/mods.model.php';

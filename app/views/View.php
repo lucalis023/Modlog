@@ -4,7 +4,7 @@ class View {
   protected $templates = [];
   protected $stylesheets = [];
 
-  public function renderHeader() {
+  public function renderHeader($tittle) {
     require_once './app/templates/header.phtml';
   }
 
@@ -14,7 +14,7 @@ class View {
 
   public function renderPage($data) {
     extract($data);
-    $this->renderHeader();
+    $this->renderHeader($tittle);
     foreach ($this->templates as $template) {
       require_once $template;
     }
