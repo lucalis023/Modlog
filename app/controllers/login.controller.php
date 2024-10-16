@@ -31,7 +31,7 @@ class loginController extends BaseController {
         $this->view->renderLogin($this->data);
       }
     } else {
-       $this->view->renderLogin([]);
+       $this->view->renderLogin($this->data);
     }
   }
 
@@ -58,7 +58,7 @@ class loginController extends BaseController {
         header('Location: ' . BASE_URL . 'login/');
       }
     } else {
-      $this->view->renderRegister([]);
+      $this->view->renderRegister($this->data);
     }
   }
 }

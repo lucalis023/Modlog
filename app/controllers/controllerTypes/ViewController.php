@@ -34,6 +34,7 @@ abstract class ViewController {
     }
   }
 
+
   public function setTittle($value) {
     $this->setData('tittle', 'Modlog: ' . $value);
   }

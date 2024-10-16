@@ -1,16 +1,18 @@
-<section>
-  <h2>Creators</h2>
+<h2 class="tittle">Creators</h2>
+<section class="item-list">
   <ul>
     <?php foreach ($creators as $creator) : ?>
       <li>
-        <a href="<?= BASE_URL . 'creator/' . $creator->id ?>"><?= $creator->name ?></a>
+        <a class="open" href="<?= BASE_URL . 'creator/' . $creator->id ?>">
+        <p><?= $creator->name ?></p>
+        </a>
         <?php if (isset($_SESSION['admin'])  && $_SESSION['admin'] == 1): ?>
           <a href="<?= BASE_URL . 'edit/creator/' . $creator->id ?>">Edit</a>
         <?php endif ?>
       </li>
     <?php endforeach ?>
     <?php if (isset($_SESSION['admin'])  && $_SESSION['admin'] == 1): ?>
-      <li>
+      <li class="add">
         <a href="<?= BASE_URL . 'new/creator/' ?>">Add</a>
       </li>
     <?php endif ?>

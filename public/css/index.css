@@ -2,15 +2,20 @@
 
 :root {
   font-family: "Afacad Flux", sans-serif;
-  --header-main-color: #cf3032;
-  --header-sub-color: #b33234;
-  --footer-color: #2f2f3c;
-  --bg-color: #4f4f52;
-  --accent-color: #ec2f32;
-  --text-color: #2f2f3b;
-  --darker-bg: #313131;
+  --header-main-color: #BE2537;
+  --header-sub-color: #931D2B;
+
+  --text-color: #efefef;
+  --text-header: #2f2f3b;
+  --text-footer: #020000;
+
   --btn-hover: #c4c2e0;
   --btn-delete-hover: #da5558;
+
+  --bg-1: #1f1f1f;
+  --bg-2: #2f2c2c;
+  --bg-3: #3f3c3c;
+  --bg: #505050;
 }
 
 *{
@@ -20,14 +25,14 @@
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: var(--bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 a, a:visited {
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 header {
@@ -35,10 +40,11 @@ header {
   background-color: var(--header-main-color);
   position: sticky;
   top: 0;
+  z-index: 100;
 }
 
 header a, header a:visited {
-  color: var(--text-color);
+  color: var(--text-header);
 }
 
 header div {
@@ -47,6 +53,7 @@ header div {
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  z-index: 100;
 }
 
 header nav {
@@ -64,17 +71,68 @@ header ul li {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+main h2.tittle {
+  margin: 1rem 2.5rem 0 2.5rem; 
+  font-size: 2.2rem;
+}
+
+main .add {
+  padding: .5rem 1rem;
+}
+
+main .add a {
   width: 100%;
 }
 
-main ul {
-  list-style-type: none;
+main .item-list {
+  width: 100%;
+  padding: 1rem;
 }
 
-main ul li a img{
-  width: 3rem;
-  height: 3rem;
-  object-fit: cover;
+main .item-list ul {
+  width: 100%;
+  background-color: var(--bg-3);
+  padding: 1rem;
+  border-radius: .6rem;
+}
+
+main .item-list li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  min-height: 3rem;
+  background: var(--bg-2);
+  border-radius: .5rem;
+  overflow: hidden;
+}
+
+main .item-list li:not(:last-child) {
+  margin-bottom: .6rem;
+}
+
+main .item-list li:has(.open:hover) {
+  background: var(--bg);
+}
+
+main .item-list .add:has(a:hover) {
+  background: var(--bg);
+}
+
+main .item-list .open {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+main .item-list .open p {
+  padding-left: 1rem;
 }
 
 footer {
@@ -83,5 +141,6 @@ footer {
   position: sticky;
   margin-top: auto;
   bottom: 0;
-  background: var(--footer-color);
+  background: var(--bg-1);
+  color: var(--text-footer);
 }

@@ -31,6 +31,7 @@ class catalogController extends ViewController{
       $this->setData('categories', $categories);
 
       if (!empty($params['category'])) {
+        $this->setData('hasCategory', $params['category']);
         $mods = $this ->modsModel->getModsByGameAndCategory($params['id'], $params['category']);
       } else {
         $mods = $this->modsModel->getModsByGame($game->id);

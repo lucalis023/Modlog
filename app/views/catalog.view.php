@@ -4,6 +4,7 @@ require_once './app/views/View.php';
 class catalogView extends View{
   public function renderCatalog($data) {
     extract($data);
+    $this->addStylesheet('catalog.css');
     $this->addTemplate('/catalog/catalog_banner.phtml');
     $this->addTemplate('/catalog/categories_sidebar.phtml');
     if (!empty($mods)) {

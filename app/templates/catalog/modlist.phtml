@@ -1,12 +1,14 @@
-<section>
+<section class="item-list">
   <ul>
     <?php foreach($mods as $mod): ?>
       <li>
-        <a href="<?= BASE_URL . 'modpage/' . $mod->id?>">
-          <?php if (isset($mod->image) && !empty($mod->image)) : ?>
-            <img src="<?= BASE_URL . $mod->image ?>" alt="<?= $mod->name ?> image">
-          <?php endif ?>
-          <?= $mod->name ?>
+        <a class="open" href="<?= BASE_URL . 'modpage/' . $mod->id?>">
+          <div class="img-cont">
+            <?php if (isset($mod->image) && !empty($mod->image)) : ?>
+              <img src="<?= BASE_URL . $mod->image ?>" alt="<?= $mod->name ?> image">
+            <?php endif ?>
+          </div>
+          <p><?= $mod->name ?></p>
         </a>
         <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
           <a href="<?= BASE_URL . 'edit/mod/' . $mod->game_id . '/' . $mod->id ?>">Edit</a>
@@ -14,9 +16,12 @@
       </li>
     <?php endforeach?>
     <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] = 1) :?>
-      <li>
+      <li class="add">
           <a href="<?= BASE_URL . 'new/mod/' . $mod->game_id ?>">Add new mod</a>
       </li>
     <?php endif ?>
   </ul>
+
+</section>
+
 </section>

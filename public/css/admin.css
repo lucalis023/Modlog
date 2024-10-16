@@ -7,21 +7,25 @@ main {
 
 main form {
     display: flex;
-    width: 40vw;
+    width: 30vw;
+    min-width: 18rem;
     flex-direction: column;
-    background: var(--darker-bg);
+    background: var(--bg-2);
     border-radius: .5rem;
     padding: 1.5rem 2rem;
 }
 
 main form label {
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 main form button {
     border: 1px var(--text-color);
     border-radius: .2rem;
     padding: .2rem .5rem;
+    min-width: 30%;
 }
 
 main form button:hover {

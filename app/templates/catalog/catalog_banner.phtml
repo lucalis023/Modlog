@@ -1,1 +1,12 @@
-<h2><?= $game->name?></h2>
+<section class="banner">
+    <?php if ($game->image):?>
+        <div class="img-wrap">
+            <img src="<?=BASE_URL . $game->image?>" alt="<?= $game->name?> banner">
+        </div>
+    <?php endif?>
+    <div class="text">
+        <h2><?= $game->name?></h2>
+        <p><?= $game->description?></p>
+    </div>
+</section>
+<section class="body">
