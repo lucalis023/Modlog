@@ -19,7 +19,7 @@ class loginController extends BaseController {
 
       if (!empty($user)) {
         if (password_verify($pass, $user->password)) {
-          $this->setUser($user->id, $user->username, $user->id);
+          $this->setUser($user);
           header('Location: '. BASE_URL);
 
         } else {
@@ -42,6 +42,7 @@ class loginController extends BaseController {
       unset($_SESSION['user_id']);
       unset($_SESSION['user_name']);
       unset($_SESSION['admin']);
+      session_destroy();
       header('Location: ' . $url);
     }
   }

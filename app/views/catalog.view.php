@@ -5,6 +5,7 @@ class catalogView extends View{
   public function renderCatalog($data) {
     extract($data);
     $this->addStylesheet('catalog.css');
+    $this->addStylesheet('lists.css');
     $this->addTemplate('/catalog/catalog_banner.phtml');
     $this->addTemplate('/catalog/categories_sidebar.phtml');
     if (!empty($mods)) {

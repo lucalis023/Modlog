@@ -42,7 +42,7 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 
 INSERT INTO `games` (`id`, `name`, `description`, `image`) VALUES
-(1, 'Minecraft', 'Minecraft es un videojuego de construcción y exploración en un entorno de mundo abierto, creado por el desarrollador sueco Markus Persson, más conocido como ', 'public/uploads/games/Minecraft_9f0fa896f8c3ace383ea6f3fdb6b832c.png'),
+(1, 'Minecraft', 'Minecraft es un videojuego de construcción y exploración en un entorno de mundo abierto, creado por el desarrollador sueco Markus Persson, más conocido como \"Notch\". Inicialmente lanzó el juego bajo su estudio Mojang, que más tarde pasó a ser parte de Microsoft. La versión original del juego, conocida como Java Edition, fue programada en Java, mientras que más adelante se desarrolló una versión en C++, llamada Bedrock Edition.', 'public/uploads/games/Minecraft_9f0fa896f8c3ace383ea6f3fdb6b832c.png'),
 (2, 'Kerbal Space Program', 'Kerbal Space Program, o KSP, es un simulador espacial donde los jugadores dirigen su propio programa espacial. El juego gira en torno a la construcción de cohetes, naves espaciales, vehículos de exploración y estaciones orbitales, con el objetivo de lanzarlos al espacio y realizar misiones a otros planetas o lunas dentro de un sistema planetario ficticio que recuerda al sistema solar.', 'public/uploads/games/Kerbal Space Program_88d43cfd93c7043407d14c6af4988dd2.png'),
 (16, 'Stardew Valley', 'Stardew Valley es un juego de simulación en el que heredas una granja y debes restaurarla. Puedes cultivar, criar animales, pescar, minar y relacionarte con los habitantes del pueblo, mientras mejoras la granja y puedes formar una familia.', 'public/uploads/games/Stardew Valley_ea9698dafd9b416c80ed31512f24af73.png');
 
@@ -79,9 +79,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `admin`) VALUES
-(1, 'KK', 'leokessy2005@gmail.com', '$2y$10$i9AvtjUzTvU8WVCV58zjVup8gswlvXaV3MV1YQEIAs2OMwW3wdP6S', 1),
+(1, 'KK', 'leokessy2005@gmail.com', '$2y$10$i9AvtjUzTvU8WVCV58zjVup8gswlvXaV3MV1YQEIAs2OMwW3wdP6S', 0),
 (2, 'zz', 'zz@gmail.com', '$2y$10$wocO6toV5jvoFjOCOm3hteSJNSrgRafp5IL1jj3vYBEc9DReFS5/.', 0),
-(3, 'Josue', 'a@a', '$2y$10$AZHaCbje/3AHlYl8q2MLYewqATscGexPXjfEJ.MjsMNHgrE.9HQ5q', 0);
+(3, 'Josue', 'a@a', '$2y$10$AZHaCbje/3AHlYl8q2MLYewqATscGexPXjfEJ.MjsMNHgrE.9HQ5q', 0),
+(5, 'Admin', 'admin@gmail.com', '$2y$10$gxiM0kQ2vrFFEIioh.KU..axbPqb4IVcX9xE.xsS5R7G.MKuq85bi', 1),
+(6, 'User', 'user@gmail.com', '$2y$10$hAC6VOc4G6aa4rqcaHnu3OvnlhML7/O.E./JM4DDgafzi8XwsPHIy', 0);
 
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
@@ -104,19 +106,19 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 ALTER TABLE `creators`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 ALTER TABLE `mods`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 ALTER TABLE `categories`
   ADD CONSTRAINT `FK_category_game_id` FOREIGN KEY (`id_game`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;

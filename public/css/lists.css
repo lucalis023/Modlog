@@ -1,0 +1,52 @@
+main .add {
+    padding: .5rem 1rem;
+  }
+  
+  main .add a {
+    width: 100%;
+  }
+  
+  main .item-list {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  main .item-list ul {
+    width: 100%;
+    background-color: var(--bg-3);
+    padding: 1rem;
+    border-radius: .6rem;
+  }
+  
+  main .item-list li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    min-height: 3rem;
+    background: var(--bg-2);
+    border-radius: .5rem;
+    overflow: hidden;
+  }
+  
+  main .item-list li:not(:last-child) {
+    margin-bottom: .6rem;
+  }
+  
+  main .item-list li:has(.open:hover) {
+    background: var(--bg);
+  }
+  
+  main .item-list .add:has(a:hover) {
+    background: var(--bg);
+  }
+  
+  main .item-list .open {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  main .item-list .open p {
+    padding-left: 1rem;
+  }

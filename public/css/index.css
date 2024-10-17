@@ -6,7 +6,7 @@
   --header-sub-color: #931D2B;
 
   --text-color: #efefef;
-  --text-header: #2f2f3b;
+  --text-header: #181818;
   --text-footer: #020000;
 
   --btn-hover: #c4c2e0;
@@ -47,11 +47,35 @@ header a, header a:visited {
   color: var(--text-header);
 }
 
+header .username-cont {
+  display: flex;
+  align-items: center;
+}
+
+header .user {
+  font-size: 1.3rem;
+}
+
+header .username-cont button {
+  padding: .2rem .5rem;
+  margin-left: 1rem;
+  background: var(--bg-1);
+  opacity: .8;
+  color: var(--text-color);
+  border: 1px solid #efefef2f;
+  border-radius: .2rem;
+}
+
+header .username-cont button:hover {
+  opacity: 1;
+}
+
 header div {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
   z-index: 100;
 }
@@ -80,59 +104,6 @@ main {
 main h2.tittle {
   margin: 1rem 2.5rem 0 2.5rem; 
   font-size: 2.2rem;
-}
-
-main .add {
-  padding: .5rem 1rem;
-}
-
-main .add a {
-  width: 100%;
-}
-
-main .item-list {
-  width: 100%;
-  padding: 1rem;
-}
-
-main .item-list ul {
-  width: 100%;
-  background-color: var(--bg-3);
-  padding: 1rem;
-  border-radius: .6rem;
-}
-
-main .item-list li {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding-right: 1rem;
-  min-height: 3rem;
-  background: var(--bg-2);
-  border-radius: .5rem;
-  overflow: hidden;
-}
-
-main .item-list li:not(:last-child) {
-  margin-bottom: .6rem;
-}
-
-main .item-list li:has(.open:hover) {
-  background: var(--bg);
-}
-
-main .item-list .add:has(a:hover) {
-  background: var(--bg);
-}
-
-main .item-list .open {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-main .item-list .open p {
-  padding-left: 1rem;
 }
 
 footer {

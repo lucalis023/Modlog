@@ -17,3 +17,11 @@ Como cargar el sitio:
 En caso de no cargar las imagenes, checkear el archivo de configuracion de apache (httpd.conf) y asegurarse de que en la primer ocurrencia de <Directory /> aparezca tal que:
 
 ![httpd.conf ejemplo](https://github.com/lucalis023/Modlog/blob/main/httpdExample.png?raw=true)
+
+User sin permisos:
+- Email: user@gmail.com
+- Password: user
+
+User con permisos:
+- Email: admin@gmail.com
+- Password: admin

@@ -4,6 +4,8 @@ require_once './app/views/View.php';
 class creatorsView extends View {
   public function renderCreator($data) {
     extract($data);
+    $this->addStylesheet('detailPage.css');
+    $this->addStylesheet('lists.css');
     $this->addTemplate('/creators/creator_header.phtml');
     if (!empty($mods)) {
       $this->addTemplate('/creators/modlist.phtml');
@@ -12,6 +14,7 @@ class creatorsView extends View {
   }
 
   public function renderCreators($data) {
+    $this->addStylesheet('lists.css');
     $this->addTemplate('/creators/creators_list.phtml');
     $this->renderPage($data);
   }

@@ -1,0 +1,16 @@
+main .detail {
+    padding: 1rem;
+}
+
+main .detail h2 {
+    font-size: 2rem;
+}
+
+main .detail .description {
+    max-width: 30rem;
+    padding: 1rem 0rem;
+}
+
+main .detail p {
+    font-size: 1.1rem;
+}

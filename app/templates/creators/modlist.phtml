@@ -1,5 +1,11 @@
-<ul>
-  <?php foreach($mods as $mod): ?>
-    <li><a href="<?= BASE_URL . 'modpage/' . $mod->id ?>"><?= $mod->name ?></a></li>
-  <?php endforeach ?>
-</ul>
+<section class="item-list">
+  <ul>
+    <?php foreach($mods as $mod): ?>
+      <li>
+      <a class="open" href="<?= BASE_URL . 'modpage/' . $mod->id ?>">
+        <p><?= $mod->name ?></p>
+      </a>
+      </li>
+    <?php endforeach ?>
+  </ul>
+</section>
